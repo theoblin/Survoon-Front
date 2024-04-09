@@ -3,6 +3,8 @@ import { jwtDecode } from "jwt-decode";
 import { DecodedUserFromToken, LoginUser, User } from 'src/services/dto'
 import { api } from 'src/services';
 import Storage from "../utils/storage"
+import router from 'src/router';
+import { useRoute } from 'vue-router';
 
 
 const useUserStore = defineStore('user', {
@@ -10,14 +12,23 @@ const useUserStore = defineStore('user', {
     user: undefined as User | undefined,
     error: undefined as unknown,
   }),
-  getters: {
-    isAuthenticated: (state) => {
-      if (!state.user?.token)
-        return false
-      return (jwtDecode(state.user.token) as DecodedUserFromToken).exp > Math.floor(Date.now() / 1000)
-    },
-  },
   actions: {
+    isAuthenticated(){
+      const userStorage = new Storage<User>('user')
+      const user = userStorage.get()
+      if (!user?.token) 
+        return false
+      try{
+        const decoded = jwtDecode(user.token)
+        if (decoded.email&&decoded.id&&decoded.exp&&decoded.iat) {
+          return (jwtDecode(user.token) as DecodedUserFromToken).exp > Math.floor(Date.now() / 1000)
+        }else{
+          return false
+        }
+      }catch(error){
+        return false
+      }
+    },
     async login(credentials: LoginUser) {
       this.$reset()
       api.user.login( credentials )
@@ -36,6 +47,8 @@ const useUserStore = defineStore('user', {
         const userStorage = new Storage<User>('user')
         userStorage.set(result.data.user)
 
+        router.push({ path: "/profile" });
+
       })
       .catch((error) => {
         this.$patch({
@@ -45,7 +58,7 @@ const useUserStore = defineStore('user', {
     },
     logout() {
       this.$reset()
-      //this.router.push({ name: 'login' })
+      router.push({ path: "/login" });
     },
   },
 })
