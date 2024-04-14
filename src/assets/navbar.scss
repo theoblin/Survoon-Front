@@ -1,0 +1,20 @@
+nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 5vh;
+}
+
+#part_1{
+    display: flex;
+    width: 10%;
+}
+#part_2{
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+}
+#part_3{
+    display: flex;
+    flex-direction: column;
+}

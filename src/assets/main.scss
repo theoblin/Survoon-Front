@@ -1,0 +1,21 @@
+
+body,html,#app{
+    height: 100vh;
+    margin: 0px;
+
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+}
+#router_view{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    height: 93vh;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+
+
+}

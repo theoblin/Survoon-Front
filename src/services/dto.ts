@@ -3,6 +3,12 @@ export interface LoginUser {
     password: string;
 }
 
+export interface RegisterUser {
+    email: string;
+    password: string;
+    passwordConfirm: string;
+}
+
 export interface User {
     id: number;
     email: string;
