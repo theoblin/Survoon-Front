@@ -1,25 +1,28 @@
 import {defineStore } from 'pinia'
 import { jwtDecode } from "jwt-decode";
-import { DecodedUserFromToken, LoginUser, RegisterUser, User } from 'src/services/dto'
+import { DecodedUserFromToken, LoginUser, RegisterUser, UpdateUser, User } from 'src/services/dto'
 import { api } from 'src/services';
 import Storage from "../utils/storage"
 import router from 'src/router';
+
+const userStorage = new Storage<User>('user')
 
 
 const useUserStore = defineStore('user', {
   state: () => ({
     user: undefined as User | undefined,
-    error: undefined as unknown,
+    error: {login:"",signup:"",email:"",password:""},
   }),
   getters:{
-    getUser(state){
-      console.log(state)
-      return state.user != undefined
+    getUser(){
+      return userStorage.get()
+    },
+    getErrors(state){
+      return {login:state.error.login,signup:state.error.signup,email:state.error.email,password:state.error.password};
     }
   },
   actions: {
     isAuthenticated(){
-      const userStorage = new Storage<User>('user')
       const user = userStorage.get()
       if (!user?.token){
         return false
@@ -50,7 +53,6 @@ const useUserStore = defineStore('user', {
         })
 
         // Setting user in localStorage
-        const userStorage = new Storage<User>('user')
         userStorage.set(result.data.user)
 
         router.push({ path: "/" });
@@ -58,7 +60,7 @@ const useUserStore = defineStore('user', {
       })
       .catch((error) => {
         this.$patch({
-          error : error.response.data.User
+          error : {login :error.response.data.User}
         })
       })
     },
@@ -77,7 +79,6 @@ const useUserStore = defineStore('user', {
         })
         
         // Setting user in localStorage
-        const userStorage = new Storage<User>('user')
         userStorage.set(result.data.user)
 
         router.push({ path: "/login" });
@@ -86,7 +87,7 @@ const useUserStore = defineStore('user', {
       .catch((error) => {
         (error.response.data.message).forEach((e:string) => {
           this.$patch({
-            error : e
+            error : {signup :e}
           })
         })
    
@@ -96,6 +97,37 @@ const useUserStore = defineStore('user', {
       this.$reset()
       router.push({ path: "/login" });
     },
+    deleteUser(id:number){
+      this.$reset()
+      api.user.deleteOne( id )
+      .then( (result) => {
+        router.push({ path: "/login" });
+      }).catch((deleteError) => {
+        console.log(deleteError)
+      })
+    },
+    updateUser(id:number,user:any){
+      this.$reset()
+      api.user.updateOne( id,user )
+      .then( (result) => {
+        this.$patch({
+          user: {
+            token:result.data.user.token,
+            id:result.data.user.id,
+            email:result.data.user.email,
+            type:result.data.user.type,
+            language:result.data.user.language
+          },
+        })
+        userStorage.set(result.data.user)
+      }).catch((error) => {
+        console.log(error);
+        this.$patch({
+          error : {password :error.response.data.Password}
+        })
+      })
+
+    }
   },
 })
 

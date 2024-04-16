@@ -9,11 +9,21 @@ export interface RegisterUser {
     passwordConfirm: string;
 }
 
+export interface UpdateUser {
+    email: string;
+    password: string;
+    passwordOld:string;
+    passwordConfirm: string;
+    type: string;
+    language: string;
+}
+
 export interface User {
     id: number;
     email: string;
     token: string;
     type: string;
+    createdDate:Date;
     language: string;
 }
 

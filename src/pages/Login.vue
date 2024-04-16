@@ -1,12 +1,12 @@
 <template>
   <div>
     <form ref="formRef" aria-label="Login form" @submit.prevent="login">
-      <span v-if="userStore.error">{{ userStore.error }}</span>
+      <span v-if="userStore.error.login">{{ userStore.error.login }}</span>
       <input type="email" required v-model="form.email">
       <input type="password" required v-model="form.password">
 
-      <button class="btn btn-lg btn-primary pull-xs-right" :disabled="!form.email || !form.password" type="submit"> 
-      Sign in
+      <button class="btn btn-lg btn-primary pull-xs-right" :disabled="!form.email || !form.password" type="submit">
+        Sign in
       </button>
     </form>
   </div>

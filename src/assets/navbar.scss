@@ -2,7 +2,12 @@ nav{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 5vh;
+    height: 50px;
+    border-bottom: 1px black solid;
+
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
 }
 
 #part_1{
