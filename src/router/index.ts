@@ -20,20 +20,9 @@ const router = createRouter({
       name: 'signup',
       path: '/signup',
       component: () => import('../pages/Register.vue'),
-    },
-    {
-      name: 'logout',
-      path: '/logout',
-      component: () => import('../pages/Login.vue'),
-      beforeEnter: (to, from, next) => {
-        try{
-          const userStorage = new Storage<User>('user')
-          userStorage.remove()
-          next()
-        }catch(e){
-          next()
-        }
-      }
+      meta: {
+        hideNavbar: true,
+       }
     },
     {
       name: 'profile',

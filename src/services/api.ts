@@ -6,7 +6,6 @@ import Storage from "../utils/storage"
 const baseUrl =  `${CONFIG.API_HOST}`
 
 const userStorage = new Storage<User>('user')
-const token = userStorage.get().token
 
 export enum ContentType {
   Json = "application/json",
@@ -26,13 +25,13 @@ export class Api{
           return axios.post(baseUrl+"/user",{user:user})
         },
         getOne:(id:number) =>{
-          return axios.get(baseUrl+"/user/"+id, {headers: {'Authorization': `Bearer ${token}`}})
+          return axios.get(baseUrl+"/user/"+id, {headers: {'Authorization': `Bearer ${userStorage.get().token}`}})
         },
         deleteOne:(id:number) =>{
-          return axios.delete(baseUrl+"/user/"+id, {headers: {'Authorization': `Bearer ${token}`}})
+          return axios.delete(baseUrl+"/user/"+id, {headers: {'Authorization': `Bearer ${userStorage.get().token}`}})
         },
         updateOne:(id:number,user:UpdateUser) =>{
-          return axios.put(baseUrl+"/user/",{id:id,user:user}, {headers: {'Authorization': `Bearer ${token}`}})
+          return axios.put(baseUrl+"/user/",{id:id,user:user}, {headers: {'Authorization': `Bearer ${userStorage.get().token}`}})
         },
     }
 }

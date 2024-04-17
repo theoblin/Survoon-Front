@@ -60,7 +60,7 @@ const useUserStore = defineStore('user', {
       })
       .catch((error) => {
         this.$patch({
-          error : {login :error.response.data.User}
+          error : {login :error.response.data.message}
         })
       })
     },
@@ -85,22 +85,21 @@ const useUserStore = defineStore('user', {
 
       })
       .catch((error) => {
-        (error.response.data.message).forEach((e:string) => {
           this.$patch({
-            error : {signup :e}
+            error : {signup :error.response.data.message}
           })
-        })
-   
       })
     },
     logout() {
       this.$reset()
+      userStorage.remove()
       router.push({ path: "/login" });
     },
     deleteUser(id:number){
       this.$reset()
       api.user.deleteOne( id )
       .then( (result) => {
+        userStorage.remove()
         router.push({ path: "/login" });
       }).catch((deleteError) => {
         console.log(deleteError)
@@ -119,11 +118,12 @@ const useUserStore = defineStore('user', {
             language:result.data.user.language
           },
         })
+        console.log(result.data.user)
         userStorage.set(result.data.user)
       }).catch((error) => {
         console.log(error);
         this.$patch({
-          error : {password :error.response.data.Password}
+          error : {password :error.response.data.message}
         })
       })
 
