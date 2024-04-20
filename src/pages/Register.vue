@@ -1,15 +1,15 @@
 <template>
   <div>
+    <FormError v-if="userStore.errors.signup">{{ userStore.errors.signup }}</FormError>
     <form ref="formRef" aria-label="Signup form" @submit.prevent="signup">
-      <span v-if="userStore.error.signup">{{ userStore.error.signup }}</span>
-      <input type="email" required v-model="form.email">
-      <input type="password" required v-model="form.password">
-      <input type="password" required v-model="form.passwordConfirm">
-
-      <button class="btn btn-lg btn-primary pull-xs-right"
-        :disabled="!form.email || !form.password || !form.passwordConfirm" type="submit">
+      <Input :type="'email'" :placeholder="'Email'" :required="true" v-model="form.email"></Input><br>
+      <Input :type="'email'" :placeholder="'Confirm email'" :required="true" v-model="form.emailConfirm"></Input><br>
+      <Input :type="'password'" :placeholder="'Password'" :required="true" v-model="form.password"></Input><br>
+      <Input :type="'password'" :placeholder="'Confirm password'" :required="true"
+        v-model="form.passwordConfirm"></Input><br>
+      <Button :disabled="!form.email || !form.password || !form.passwordConfirm" type="submit">
         Sign in
-      </button>
+      </Button>
     </form>
   </div>
 </template>
@@ -18,11 +18,15 @@
 import type { RegisterUser } from 'src/services/dto';
 import useUserStore from 'src/stores/user';
 import { reactive } from 'vue';
+import FormError from "../components/FormError.vue";
+import Button from "../components/Button.vue";
+import Input from "../components/Input.vue";
 
 const userStore = useUserStore()
 
 const form: RegisterUser = reactive({
   email: '',
+  emailConfirm: '',
   password: '',
   passwordConfirm: '',
   type: 'user',

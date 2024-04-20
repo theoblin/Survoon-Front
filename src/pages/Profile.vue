@@ -1,20 +1,19 @@
 <template>
     <div id="profile">
-        <input v-model="fromStore.email" /><button @click="updateEmail()">Update</button><br />
-        {{ getUser ? getUser.createdDate : "createdDate error" }}<br />
-        {{ fromStore.type ? fromStore.type : "type error" }}<br />
-        <select v-model="fromStore.language" @change="updateLanguage()">
-            <option :selected="language.selected" v-for="(language, index) of availablesLanguages" :key="index"
-                :value="language.code">
-                {{ language.code }}
-            </option>
-        </select><br />
-        <input placeholder="password" type="password" v-model="fromStore.password" /><br />
-        <input placeholder="confirm" type="password" v-model="fromStore.passwordConfirm" /><span
-            v-if="getErrors.password">{{
-                getErrors.password }}</span><br /><button @click="updatePassword()">Update
-            password</button><br />
-        <button @click="deleteAccount">Delete account</button>
+        <FormError v-if="userStore.errors.update">{{ userStore.errors.update }}</FormError>
+        <Input :type="'email'" v-model="fromStore.email" :placeholderValue="'Email'"></Input><br>
+        <Button @click="updateEmail()">Update email</Button><br>
+        <div>{{ getUser ? getUser.createdDate : "createdDate error" }}</div><br>
+        <div>{{ fromStore.type ? fromStore.type : "type error" }}</div><br>
+        <FormError v-if="laguageStore.errors.load">{{ laguageStore.errors.load }}</FormError>
+        <Select @change="updateLanguage()" :options="laguageStore.languageList"
+            v-model="fromStore.language"></Select><br>
+        <div>
+            <Input :type="'password'" v-model="fromStore.password" :placeholderValue="'password'"></Input><br>
+            <Input :placeholder="'confirm'" :type="'password'" v-model="fromStore.passwordConfirm" /><br>
+        </div>
+        <Button @click="updatePassword()">Update password</Button><br>
+        <Button @click="deleteAccount">Delete account</Button><br>
     </div>
 </template>
 
@@ -22,15 +21,18 @@
 import { storeToRefs } from "pinia";
 import { UpdateUser } from "src/services/dto";
 import useUserStore from "src/stores/user";
+import Input from "../components/Input.vue";
+import Button from "../components/Button.vue";
+import Select from "../components/Select.vue";
+import FormError from "../components/FormError.vue";
 import { ref } from "vue";
+import useLanguageStore from "src/stores/language";
 
 const userStore = useUserStore();
-const { getUser, getErrors } = storeToRefs(userStore);
+const { getUser } = storeToRefs(userStore);
+const laguageStore = useLanguageStore()
 
-const errors = ref({
-    ermail: "",
-    password: "",
-});
+laguageStore.loadLanguageList()
 
 const fromStore = ref<UpdateUser>({
     email: getUser.value.email,
@@ -40,11 +42,6 @@ const fromStore = ref<UpdateUser>({
     type: getUser.value.type,
     language: getUser.value.language.code,
 });
-
-const availablesLanguages = [
-    { code: "fr", selected: fromStore.language == "fr" },
-    { code: "en", selected: fromStore.language == "en" },
-];
 
 function updateEmail() {
     userStore.updateUser(getUser.value.id, {

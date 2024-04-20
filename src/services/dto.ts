@@ -5,6 +5,7 @@ export interface LoginUser {
 
 export interface RegisterUser {
     email: string;
+    emailConfirm:string;
     password: string;
     passwordConfirm: string;
 }
@@ -33,4 +34,27 @@ export interface DecodedUserFromToken extends User {
     iat: EpochTimeStamp
     iss: string
     nbf: EpochTimeStamp
+}
+
+export interface Survey{
+    id:number,
+    config:string,
+    name:string,
+    tags:string,
+    createdDate:Date,
+    lastUpdateDate:Date,
+    link:string,
+    visibility:string,
+    active:boolean
+}
+
+export interface CreateSurvey{
+    name:string,
+    language:string
+}
+
+export interface Language{
+    id:number,
+    code:string,
+    data:string,
 }

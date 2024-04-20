@@ -43,16 +43,18 @@ const router = createRouter({
       meta: { requiresAuth: true },
     },
     {
-      name: 'survey',
-      path: '/survey',
-      component: () => import('../pages/Survey.vue'),
+      name: 'edit',
+      path: '/user/survey/:id',
+      component: () => import('../pages/SurveyEdit.vue'),
       meta: { requiresAuth: true },
     },
     {
-      name: 'edit',
-      path: '/survey',
-      component: () => import('../pages/Edit_survey.vue'),
-      meta: { requiresAuth: true },
+      name: 'survey',
+      path: '/survey/:id',
+      component: () => import('../pages/Survey.vue'),
+      meta: {
+        hideNavbar: true,
+      }
     },
     {
       name: 'templates',

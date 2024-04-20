@@ -1,13 +1,12 @@
 <template>
   <div>
+    <FormError v-if="userStore.errors.login">{{ userStore.errors.login }}</FormError>
     <form ref="formRef" aria-label="Login form" @submit.prevent="login">
-      <span v-if="userStore.error.login">{{ userStore.error.login }}</span>
-      <input type="email" required v-model="form.email">
-      <input type="password" required v-model="form.password">
-
-      <button class="btn btn-lg btn-primary pull-xs-right" :disabled="!form.email || !form.password" type="submit">
+      <Input :type="'email'" :required="true" v-model="form.email"></Input>
+      <Input :type="'password'" :required="true" v-model="form.password"></Input>
+      <Button :disabled="!form.email || !form.password" type="submit">
         Sign in
-      </button>
+      </Button>
     </form>
   </div>
 </template>
@@ -16,6 +15,9 @@
 import type { LoginUser } from 'src/services/dto';
 import useUserStore from 'src/stores/user';
 import { reactive } from 'vue';
+import FormError from "../components/FormError.vue";
+import Button from "../components/Button.vue";
+import Input from "../components/Input.vue";
 
 const userStore = useUserStore()
 

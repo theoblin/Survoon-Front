@@ -1,7 +1,7 @@
 <template>
     <Loading v-if="surveyStore.isLoading"></Loading>
     {{ getCurrentSurvey }}
-    <SurveyError v-if="surveyStore.errors" :messaage="surveyStore.errors">{{ surveyStore.errors }}</SurveyError>
+    <SurveyError v-if="surveyStore.errors.load" :message="surveyStore.errors.load"></SurveyError>
 </template>
 
 <script setup lang="ts">

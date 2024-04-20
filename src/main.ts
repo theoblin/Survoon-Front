@@ -1,6 +1,9 @@
 import './assets/main.scss'
 import './assets/navbar.scss'
 import './assets/profile.scss'
+import './assets/surveyItem.scss'
+import './assets/surveyList.scss'
+import './assets/modale.scss'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'

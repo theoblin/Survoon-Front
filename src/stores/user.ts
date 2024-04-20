@@ -1,6 +1,6 @@
 import {defineStore } from 'pinia'
 import { jwtDecode } from "jwt-decode";
-import { DecodedUserFromToken, LoginUser, RegisterUser, UpdateUser, User } from 'src/services/dto'
+import { DecodedUserFromToken, LoginUser, RegisterUser, User } from 'src/services/dto'
 import { api } from 'src/services';
 import Storage from "../utils/storage"
 import router from 'src/router';
@@ -11,15 +11,12 @@ const userStorage = new Storage<User>('user')
 const useUserStore = defineStore('user', {
   state: () => ({
     user: undefined as User | undefined,
-    error: {login:"",signup:"",email:"",password:""},
+    errors: {login:null,signup:null,update:null},
   }),
   getters:{
     getUser(){
       return userStorage.get()
     },
-    getErrors(state){
-      return {login:state.error.login,signup:state.error.signup,email:state.error.email,password:state.error.password};
-    }
   },
   actions: {
     isAuthenticated(){
@@ -52,15 +49,15 @@ const useUserStore = defineStore('user', {
           },
         })
 
-        // Setting user in localStorage
         userStorage.set(result.data.user)
 
         router.push({ path: "/" });
 
       })
       .catch((error) => {
+        this.errors.login = null
         this.$patch({
-          error : {login :error.response.data.message}
+          errors : {login :error.response.data.message}
         })
       })
     },
@@ -78,15 +75,15 @@ const useUserStore = defineStore('user', {
           },
         })
         
-        // Setting user in localStorage
         userStorage.set(result.data.user)
 
         router.push({ path: "/login" });
 
       })
       .catch((error) => {
+        this.errors.signup = null
           this.$patch({
-            error : {signup :error.response.data.message}
+            errors : {signup :error.response.data.message}
           })
       })
     },
@@ -106,6 +103,7 @@ const useUserStore = defineStore('user', {
       })
     },
     updateUser(id:number,user:any){
+      this.errors = {login:"",signup:"",email:"",password:""}
       this.$reset()
       api.user.updateOne( id,user )
       .then( (result) => {
@@ -118,12 +116,11 @@ const useUserStore = defineStore('user', {
             language:result.data.user.language
           },
         })
-        console.log(result.data.user)
         userStorage.set(result.data.user)
       }).catch((error) => {
         console.log(error);
         this.$patch({
-          error : {password :error.response.data.message}
+          errors : {update :error.response.data.message}
         })
       })
 

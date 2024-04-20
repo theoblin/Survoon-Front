@@ -1,6 +1,6 @@
 import axios from "axios";
 import { CONFIG } from "../../config";
-import { LoginUser, RegisterUser, UpdateUser, User } from "./dto";
+import { CreateSurvey, LoginUser, RegisterUser, UpdateUser, User } from "./dto";
 import Storage from "../utils/storage"
 
 const baseUrl =  `${CONFIG.API_HOST}`
@@ -28,10 +28,29 @@ export class Api{
           return axios.get(baseUrl+"/user/"+id, {headers: {'Authorization': `Bearer ${userStorage.get().token}`}})
         },
         deleteOne:(id:number) =>{
-          return axios.delete(baseUrl+"/user/"+id, {headers: {'Authorization': `Bearer ${userStorage.get().token}`}})
+          return axios.delete(baseUrl+`/user/${id}`, {headers: {'Authorization': `Bearer ${userStorage.get().token}`}})
         },
         updateOne:(id:number,user:UpdateUser) =>{
           return axios.put(baseUrl+"/user/",{id:id,user:user}, {headers: {'Authorization': `Bearer ${userStorage.get().token}`}})
         },
     }
+
+    surveys = {
+      getUserSurveys:(id:number) =>{
+        return axios.get(baseUrl+`/user/${id}/surveys/`, {headers: {'Authorization': `Bearer ${userStorage.get().token}`}})
+      },
+      getUserOneSurvey:(id:number) =>{
+        return axios.get(baseUrl+`/survey/${id}`, {headers: {'Authorization': `Bearer ${userStorage.get().token}`}})
+      },
+      crateOneSurvey:(survey:CreateSurvey) =>{
+        return axios.post(baseUrl+`/survey/create`,{survey:survey}, {headers: {'Authorization': `Bearer ${userStorage.get().token}`}})
+      },
+    }
+
+    language = {
+      getAllLanguages:()=> {
+        return axios.get(baseUrl+`/language/all`, {headers: {'Authorization': `Bearer ${userStorage.get().token}`}})
+      }
+    }
+
 }

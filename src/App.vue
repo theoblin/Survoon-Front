@@ -7,9 +7,8 @@ import Navbar from './components/Navbar.vue'
 
 
 <template>
-  <Navbar v-if="!$route.meta.hideNavbar"/>
-  <div id="router_view" >
+  <Navbar v-if="!$route.meta.hideNavbar" />
+  <div id="router_view">
     <RouterView />
   </div>
 </template>
-
