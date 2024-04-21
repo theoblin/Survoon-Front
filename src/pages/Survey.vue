@@ -1,24 +1,21 @@
 <template>
-    <Loading v-if="surveyStore.isLoading"></Loading>
-    {{ getCurrentSurvey }}
-    <SurveyError v-if="surveyStore.errors" :messaage="surveyStore.errors">{{ surveyStore.errors }}</SurveyError>
+    <div id="survey">
+        <SurveyError v-if="surveyStore.errors" :messaage="surveyStore.errors">{{ surveyStore.errors }}</SurveyError>
+
+        <SurveyEditQuestion v-if="surveyStore.editMode">
+        </SurveyEditQuestion>
+
+        <SurveyQuestion v-if="!surveyStore.editMode">
+        </SurveyQuestion>
+    </div>
 </template>
 
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
-import useSurveysStore from 'src/stores/surveys';
+import useSurveyStore from 'src/stores/survey';
 import SurveyError from "../components/SurveyError.vue";
-import { useRoute } from 'vue-router';
+import SurveyEditQuestion from "../components/SurveyEditQuestion.vue";
+import SurveyQuestion from "../components/SurveyQuestion.vue";
 
-const route = useRoute()
-
-const {
-    getCurrentSurvey,
-} = storeToRefs(
-    useSurveysStore()
-);
-
-const surveyStore = useSurveysStore()
-surveyStore.loadSurvey(Number(route.params.id))
+const surveyStore = useSurveyStore()
 
 </script>

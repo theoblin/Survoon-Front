@@ -1,6 +1,6 @@
 import axios from "axios";
 import { CONFIG } from "../../config";
-import { CreateSurvey, LoginUser, RegisterUser, UpdateUser, User } from "./dto";
+import { CreateQuestion, CreateSurvey, LoginUser, Question, RegisterUser, UpdateUser, User } from "./dto";
 import Storage from "../utils/storage"
 
 const baseUrl =  `${CONFIG.API_HOST}`
@@ -51,6 +51,16 @@ export class Api{
       getAllLanguages:()=> {
         return axios.get(baseUrl+`/language/all`, {headers: {'Authorization': `Bearer ${userStorage.get().token}`}})
       }
+    }
+
+    question = {
+      createOneQuestion:(question:CreateQuestion,surveyId:number)=> {
+        return axios.post(baseUrl+`/question`,{question:question,survey:surveyId}, {headers: {'Authorization': `Bearer ${userStorage.get().token}`}})
+      },
+      removeOneQuestion:(questionId:number)=> {
+        return axios.delete(baseUrl+`/question/${questionId}`, {headers: {'Authorization': `Bearer ${userStorage.get().token}`}})
+      }
+
     }
 
 }

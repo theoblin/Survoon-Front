@@ -25,9 +25,7 @@ const useSurveysStore = defineStore('surveys', {
     getSurveys(state){
         return state.list
     },
-    getCurrentSurvey(state){
-      return state.currentSurvey
-  }
+
   },
   actions: {
     loadSurveyList(){
@@ -43,21 +41,6 @@ const useSurveysStore = defineStore('surveys', {
           })
           this.isLoading = false;
         })
-    },
-    loadSurvey(surveyId:number){
-      this.isLoading = true;
-      api.surveys.getUserOneSurvey( surveyId )
-      .then( (survey) => {
-        this.currentSurvey=survey.data
-        this.errors.load=null;
-        this.isLoading = false;
-      }) 
-      .catch((error) => {
-        this.$patch({
-          errors : {load :error.response.data.message}
-        })
-        this.isLoading = false;
-      })
     },
     createSurvey(surveyData:CreateSurvey){
       this.isLoading = true;

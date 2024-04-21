@@ -58,3 +58,14 @@ export interface Language{
     code:string,
     data:string,
 }
+
+export interface Question{
+    id:number,
+    name:string,
+    type:string
+}
+
+export interface CreateQuestion{
+    name:string,
+    type:string
+}
