@@ -3,15 +3,20 @@ import { api } from 'src/services'
 import { CreateSurvey, Survey } from 'src/services/dto'
 import useUserStore from 'src/stores/user';
 import useModaleStore from './modale';
+import useAnswerStore from './answer';
+import Storage from "../utils/storage"
+
 import router from 'src/router';
+const answerStorage = new Storage<string>('answer')
 
 const {
     getUser,
-  } = storeToRefs(
+} = storeToRefs(
     useUserStore()
-  );
+);
 
   const modaleStore = useModaleStore()
+  const answerStore = useAnswerStore()
 
   
 const useSurveysStore = defineStore('surveys', {
@@ -25,37 +30,46 @@ const useSurveysStore = defineStore('surveys', {
     getSurveys(state){
         return state.list
     },
-
   },
   actions: {
+    toggleLoading(status:boolean){
+      status?this.isLoading = status:this.isLoading = !this.isLoading
+    },
+    resetErrors(){
+      this.errors = {create:null,load:null} 
+    },
     loadSurveyList(){
-      this.isLoading = true;
+      this.toggleLoading(true)
+      this.resetErrors()
+      answerStorage.remove()
         api.surveys.getUserSurveys( getUser.value.id )
-        .then( (surveys) => {
+        .then( async (surveys) => {
             this.list=surveys.data
-            this.isLoading = false;
+            await new Promise(resolve => setTimeout(resolve, 1000)); //Sleep to check loading
+            this.toggleLoading(false)
             this.errors.load=null
         }).catch((error)=> {
           this.$patch({
             errors : {load :error.response.data.message}
           })
-          this.isLoading = false;
+          this.toggleLoading(false)
         })
     },
     createSurvey(surveyData:CreateSurvey){
-      this.isLoading = true;
+      this.toggleLoading(true)
+      this.resetErrors()
       api.surveys.crateOneSurvey( surveyData )
       .then( (response) => {
         this.list.push(response.data)
         modaleStore.toggle()
-        this.isLoading = false;
+        this.toggleLoading(false)
         router.push({ path: `/user/survey/${response.data.survey.id}` });
       }) 
       .catch((error) => {
-        this.isLoading = false;
         this.$patch({
           errors : {create :error.response.data.message}
         })
+        this.toggleLoading(false)
       })
     }
 }

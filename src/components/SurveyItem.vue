@@ -17,6 +17,9 @@
 <script setup lang="ts">
 import Button from "../components/Button.vue";
 import router from 'src/router';
+import useAnswerStore from 'src/stores/answer';
+
+const answerStore = useAnswerStore()
 
 const props = defineProps(['name', 'visibility', 'active', 'languageId', 'createdDate', 'id'])
 
@@ -25,7 +28,8 @@ function editSurvey() {
 }
 
 function testSurvey() {
-    router.push({ path: `/survey/${props.id}` });
+    answerStore.createPreAnswer(props.id)
 }
+
 
 </script>

@@ -7,6 +7,8 @@ import './assets/modale.scss'
 import './assets/surveyEdit.scss'
 import './assets/survey.scss'
 import './assets/surveyQuestion.scss'
+import './assets/reco.scss'
+import './assets/satis.scss'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'

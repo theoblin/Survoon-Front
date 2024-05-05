@@ -1,21 +1,21 @@
 <template>
 
     <Loading v-if="surveyStore.isLoading"></Loading>
-    <div id="surveyList">
+    <div v-if="!surveyStore.isLoading" id="surveyList">
         <div v-for="item in getSurveys">
             <SurveyItem :id="item.survey.id" :name="item.survey.name" :link="item.survey.link"
                 :visibility="item.survey.visibility" :active="item.survey.active" :templateId="item.survey.templateId"
-                :languageId="item.survey.languageId" :createdDate="item.survey.createdDate">
+                :languageId="item.survey.language.code" :createdDate="item.survey.createdDate">
             </SurveyItem>
         </div>
     </div>
-    <div>
+    <div v-if="!surveyStore.isLoading">
         <Button @click="openCreateSurveyModale()">Nouveau survey</Button>
     </div>
     <Modale v-if="getStatus">
         <FormError v-if="surveyStore.errors.create">{{ surveyStore.errors.create }}</FormError>
         <Input v-model="form.name" :placeholderValue="'Name'"></Input>
-        <Select :options="laguageStore.languageList" v-model="form.language"></Select>
+        <Select :attr="'code'" :options="laguageStore.languageList" v-model="form.language"></Select>
         <Button @click="createSurvey()">Créer</Button>
     </Modale>
 </template>

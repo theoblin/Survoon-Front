@@ -1,6 +1,5 @@
 import {defineStore } from 'pinia'
 import { api } from 'src/services'
-import { Language } from 'src/services/dto'
 
 
 const useLanguageStore = defineStore('language', {
@@ -9,23 +8,25 @@ const useLanguageStore = defineStore('language', {
         errors:{load:null}
     }),
     actions: {
-
-         loadLanguageList(){
+        resetErrors(){
+            this.errors = {load:null}
+        },
+        loadLanguageList(){
+            this.resetErrors()
             this.languageList = []
             api.language.getAllLanguages()
             .then( (response) => {
                 this.errors.load = null
                 response.data.forEach((lang:any) => {
-                    this.languageList.push(lang.language.code)
+                    this.languageList.push(lang.language)
                 });
             }).catch((error)=> {
                 this.errors.load = null
                 this.$patch({
                     errors : {load :error.response.data.message}
-                  })
+                })
             })
-         }
-
+        }
     }
 })
 

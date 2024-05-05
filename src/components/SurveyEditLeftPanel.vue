@@ -4,11 +4,16 @@
         <div @click="surveyStore.displayQuestion(item.id)" class="leftPanelQuestionItem"
             v-for="item in props.listQuestions" :key="item.id">
             {{ item.name }}
+            {{ item.position }}
             <div v-if="surveyStore.currentEditQuestion">
                 {{ item.id == surveyStore.currentEditQuestion.id ? "Selectionned" : "" }}
             </div>
+            <br>
+            <br><br><br><br>
             <Button @click="removeQuestion(item.id)">Delete</Button>
         </div>
+        <Button @click="testSurvey()">Tester</Button>
+
     </div>
 </template>
 
@@ -17,14 +22,17 @@ import useSurveyStore from 'src/stores/survey';
 import Button from "../components/Button.vue";
 import { reactive } from 'vue';
 import { CreateQuestion } from 'src/services/dto';
+import useAnswerStore from 'src/stores/answer';
+
+const surveyStore = useSurveyStore()
+const answerStore = useAnswerStore()
 
 const props = defineProps(['listQuestions'])
 
-const surveyStore = useSurveyStore()
-
 const question: CreateQuestion = reactive({
     name: 'Nouvelle question',
-    type: 'Satis',
+    type: 1,
+    position: 1
 })
 
 function addQuestion() {
@@ -35,6 +43,9 @@ function removeQuestion(id: number) {
     surveyStore.removeQuestion(id)
 }
 
+function testSurvey() {
+    answerStore.createPreAnswer(surveyStore.currentEditSurvey.id)
+}
 
 
 </script>

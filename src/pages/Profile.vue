@@ -6,7 +6,7 @@
         <div>{{ getUser ? getUser.createdDate : "createdDate error" }}</div><br>
         <div>{{ fromStore.type ? fromStore.type : "type error" }}</div><br>
         <FormError v-if="laguageStore.errors.load">{{ laguageStore.errors.load }}</FormError>
-        <Select @change="updateLanguage()" :options="laguageStore.languageList"
+        <Select :attr="'code'" @change="updateLanguage()" :options="laguageStore.languageList"
             v-model="fromStore.language"></Select><br>
         <div>
             <Input :type="'password'" v-model="fromStore.password" :placeholderValue="'password'"></Input><br>

@@ -7,7 +7,6 @@ import router from 'src/router';
 
 const userStorage = new Storage<User>('user')
 
-
 const useUserStore = defineStore('user', {
   state: () => ({
     user: undefined as User | undefined,

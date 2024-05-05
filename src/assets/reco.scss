@@ -1,0 +1,16 @@
+#reco{
+    display: flex;
+    flex-direction: row;
+}
+
+.reco_item{
+    padding:10px;
+    border: 1px black solid;
+    cursor:pointer;
+}
+
+.reco_item_selected{
+    padding:10px;
+    border: 1px red solid;
+    cursor:pointer;
+}

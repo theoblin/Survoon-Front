@@ -1,0 +1,3 @@
+<template>
+    Notification
+</template>

@@ -4,7 +4,6 @@ import Storage from "../utils/storage"
 import {User } from 'src/services/dto'
 
 
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -46,12 +45,23 @@ const router = createRouter({
       name: 'edit',
       path: '/user/survey/:id',
       component: () => import('../pages/SurveyEdit.vue'),
+      props: { editMode: true },
       meta: { requiresAuth: true },
     },
     {
       name: 'survey',
       path: '/survey/:id',
-      component: () => import('../pages/Survey.vue'),
+      component: () => import('../pages/SurveyView.vue'),
+      props: { editMode: false },
+      meta: {
+        hideNavbar: true,
+      }
+    },
+    {
+      name: 'surveyError',
+      path: '/survey/error',
+      component: () => import('../pages/SurveyError.vue'),
+      props: { editMode: false },
       meta: {
         hideNavbar: true,
       }

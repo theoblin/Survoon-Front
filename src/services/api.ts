@@ -1,6 +1,6 @@
 import axios from "axios";
 import { CONFIG } from "../../config";
-import { CreateQuestion, CreateSurvey, LoginUser, Question, RegisterUser, UpdateUser, User } from "./dto";
+import { Answer, CreateAnswer, CreateQuestion, CreateSurvey, LoginUser, Question, RegisterUser, UpdateAnswer, UpdateQuestion, UpdateUser, User } from "./dto";
 import Storage from "../utils/storage"
 
 const baseUrl =  `${CONFIG.API_HOST}`
@@ -39,8 +39,11 @@ export class Api{
       getUserSurveys:(id:number) =>{
         return axios.get(baseUrl+`/user/${id}/surveys/`, {headers: {'Authorization': `Bearer ${userStorage.get().token}`}})
       },
-      getUserOneSurvey:(id:number) =>{
-        return axios.get(baseUrl+`/survey/${id}`, {headers: {'Authorization': `Bearer ${userStorage.get().token}`}})
+      getUserOneSurveySecure:(id:number) =>{
+        return axios.get(baseUrl+`/survey/secure/${id}`, {headers: {'Authorization': `Bearer ${userStorage.get().token}`}})
+      },
+      getOneSurvey:(id:number) =>{
+        return axios.get(baseUrl+`/survey/${id}`)
       },
       crateOneSurvey:(survey:CreateSurvey) =>{
         return axios.post(baseUrl+`/survey/create`,{survey:survey}, {headers: {'Authorization': `Bearer ${userStorage.get().token}`}})
@@ -57,10 +60,33 @@ export class Api{
       createOneQuestion:(question:CreateQuestion,surveyId:number)=> {
         return axios.post(baseUrl+`/question`,{question:question,survey:surveyId}, {headers: {'Authorization': `Bearer ${userStorage.get().token}`}})
       },
+      updateOneQuestion:(question:UpdateQuestion,surveyId:number)=>{
+        return axios.put(baseUrl+`/question`,{question:question,survey:surveyId}, {headers: {'Authorization': `Bearer ${userStorage.get().token}`}})
+      },
       removeOneQuestion:(questionId:number)=> {
         return axios.delete(baseUrl+`/question/${questionId}`, {headers: {'Authorization': `Bearer ${userStorage.get().token}`}})
       }
+    }
 
+    questionType = {
+      getAllQuestionsTypes:()=> {
+        return axios.get(baseUrl+`/questions/type/all`, {headers: {'Authorization': `Bearer ${userStorage.get().token}`}})
+      },
+      getOneQuestionsTypeById:(questionTypeId:number)=> {
+        return axios.get(baseUrl+`/questions/type/${questionTypeId}`, {headers: {'Authorization': `Bearer ${userStorage.get().token}`}})
+      },
+    }
+
+    answer = {
+      getOneAnswerByCode:(answerCode:string,surveyId:number)=> {
+        return axios.get(baseUrl+`/survey/${surveyId}/answer/${answerCode}`)
+      },
+      createOneAnswer:(data:CreateAnswer,surveyId:number)=> {
+        return axios.post(baseUrl+`/survey/${surveyId}/answer`,{answer:data})
+      },
+      updateOneAnswer:(data:UpdateAnswer,surveyId:number)=> {
+        return axios.put(baseUrl+`/survey/${surveyId}/answer`,{answer:data})
+      },
     }
 
 }

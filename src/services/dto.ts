@@ -62,10 +62,64 @@ export interface Language{
 export interface Question{
     id:number,
     name:string,
-    type:string
+    title:string,
+    config:Object,
+    questionType:QuestionType
 }
 
 export interface CreateQuestion{
     name:string,
+    type:number,
+    position:number
+}
+
+export interface UpdateQuestion{
+    id:number,
+    name:string,
+    type:number,
+    position:number
+}
+
+export interface QuestionType{
+    id:number,
+    name:string,
+    config:string
+}
+
+export interface Answer{
+    id:number,
+    body:object,
+    valid:boolean,
+    language:string,
+    token:string,
+    ended:boolean,
+    position:number,
+    code:string,
+    createdDate:Date,
+    lastUpdateDate:Date
+}
+
+export interface CreateAnswer{
+    position:number,
+    ended:boolean,
+    body:string,
+    code?:string
+}
+export interface UpdateAnswer{
+    code:string,
+    position:number,
+    ended:boolean,
+    body:string,
+}
+
+export interface AnswerBody{
+    id:number,
+    name:string,
+    type:string,
+    value:string,
+}
+
+export interface Notification{
     type:string
+    message:string
 }
