@@ -1,0 +1,25 @@
+nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 50px;
+    border-bottom: 1px black solid;
+
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+}
+
+#part_1{
+    display: flex;
+    width: 10%;
+}
+#part_2{
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+}
+#part_3{
+    display: flex;
+    flex-direction: column;
+}

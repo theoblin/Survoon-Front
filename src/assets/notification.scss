@@ -1,0 +1,16 @@
+#notification{
+    border:1px pink solid;
+    padding: 20px;
+}
+
+#notificationlist{
+    position:absolute ;
+    bottom:0;
+    left:50%;
+    height: 50%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex-direction: column;
+    width: 200px;
+}

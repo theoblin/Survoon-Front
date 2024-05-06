@@ -1,0 +1,16 @@
+#satis{
+    display: flex;
+    flex-direction: row;
+}
+
+.satis_item{
+    padding:10px;
+    border:1px black solid;
+    cursor:pointer;
+}
+
+.satis_item_selected{
+    padding:10px;
+    border:1px red solid;
+    cursor:pointer;
+}

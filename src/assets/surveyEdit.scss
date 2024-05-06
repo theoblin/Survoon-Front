@@ -1,0 +1,38 @@
+#surveyEdit{
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+
+    #leftPanel{
+
+        border: 1px red solid;
+        height: 100%;
+        width: 300px;
+    
+        .leftPanelQuestionItem{
+            border: 1px black solid;
+        }
+    
+    }
+
+        
+    #rightPanel{
+
+        border: 1px red solid;
+        height: 100%;
+        width: 500px;
+        right: 0px;
+    }
+
+
+#surveyZone{
+    border: 1px blue solid;
+    width: 100%;
+}
+
+}
+
+
+
+

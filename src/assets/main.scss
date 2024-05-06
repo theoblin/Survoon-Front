@@ -1,0 +1,20 @@
+
+body,html,#app{
+    height: 100vh;
+    margin: 0px;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+}
+#router_view{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    height: calc(100% - 50px);
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+
+
+}
