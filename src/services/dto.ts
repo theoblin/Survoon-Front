@@ -45,11 +45,13 @@ export interface Survey{
     lastUpdateDate:Date,
     link:string,
     visibility:string,
-    active:boolean
+    active:boolean,
+    entry:string
 }
 
 export interface CreateSurvey{
     name:string,
+    entry:string,
     language:string
 }
 
@@ -64,6 +66,7 @@ export interface Question{
     name:string,
     title:string,
     config:Object,
+    style:Object,
     questionType:QuestionType
 }
 

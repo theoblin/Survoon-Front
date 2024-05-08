@@ -22,6 +22,8 @@ import SurveyEditLeftPanel from "../components/SurveyEditLeftPanel.vue";
 import SurveyEditRightPanel from "../components/SurveyEditRightPanel.vue";
 import SurveyEditQuestion from "../components/SurveyEditQuestion.vue";
 import { useRoute } from 'vue-router';
+import Storage from "../utils/storage"
+const answerStorage = new Storage<string>('answer')
 
 const route = useRoute()
 const props = defineProps(["editMode"])
@@ -32,6 +34,8 @@ const {
 } = storeToRefs(
     useSurveyStore()
 );
+
+answerStorage.remove()
 
 const surveyStore = useSurveyStore()
 surveyStore.editMode = props.editMode

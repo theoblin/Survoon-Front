@@ -5,6 +5,7 @@ import Storage from "../utils/storage"
 import { jwtDecode } from "jwt-decode";
 import router from 'src/router';
 import { encodeCode } from 'src/utils/utils';
+import { decodeCode } from '../utils/utils'
 
 const answerStorage = new Storage<string>('answer')
 
@@ -33,21 +34,55 @@ const useAnswerStore = defineStore('answer', {
             this.currentBody = []
         },
 
-        async init(surveyId:number,code?:string){
+        async init(encodedCode:string){
             this.resetAnswer();
-            this.loadSurvey(surveyId).then(()=> {
-                const r = this.checkAndReadToken()
-                if(r){
-                    console.log(r.code)
-                    this.answerCode = r.code;
-                    this.loadAnswer(r.code)
-                }else if(code){
-                    console.log(code)
-                    this.answerCode = code;
-                    this.loadAnswer(code)
+
+
+            const decryptedParam = decodeCode(encodedCode)
+            const surveyId = decryptedParam.surveyId
+            const answerCode = decryptedParam.answerCode
+
+            if(answerStorage.get()){
+                const decryptedToken = decodeCode(answerStorage.get())
+                if(decryptedToken){
+                    if(decryptedToken.surveyId != decryptedParam.surveyId){
+                        router.push({ path: `/survey/error` });
+                    }
                 }
-                else{
-                    this.createAnswer({body:[],ended:false,position:this.currentPosition,code:code})
+            }
+       
+            this.loadSurvey(surveyId).then(()=> {
+
+                switch(this.currentViewSurvey.entry){
+                    case "private":
+                        if(!answerCode){
+                            router.push({ path: `/survey/error` });
+                        }else{
+                            this.answerCode = answerCode;
+                            this.loadAnswer(answerCode) 
+                            answerStorage.set(encodedCode)
+                        }
+                        break;
+                    case "public":
+                        if(answerStorage.get()){
+                            const decryptedToken = decodeCode(answerStorage.get())
+                            if(decryptedToken){
+                                if(decryptedToken.surveyId != decryptedParam.surveyId){
+                                    router.push({ path: `/survey/error` });
+                                }else{
+                                    this.loadAnswer(decryptedToken.answerCode)
+                                }
+                            }
+                        }else{
+                            if(answerCode){
+                                this.answerCode = answerCode;
+                                this.loadAnswer(answerCode)
+                                answerStorage.set(encodedCode)
+                            }else{
+                                this.createAnswer({body:[],ended:false,position:this.currentPosition,code:answerCode})
+                            }
+                        }
+                        break;
                 }
             })
         },
@@ -72,16 +107,15 @@ const useAnswerStore = defineStore('answer', {
                         this.currentBody.push(question)
                     }); 
 
+
                     this.currentAnswer = response.data.answer
                     this.currentPosition = response.data.answer.position
                     this.restorePosition(response.data.answer.position)
 
                 }).catch((error)=>{
-                    console.log("1")
                     router.push({ name: 'surveyError', params: { error: error } });
                 })
             }else{
-                console.log("2")
                 this.errors.load = "Error loading"
                 router.push({ name: 'surveyError', params: { error: this.errors } });
             }
@@ -92,17 +126,18 @@ const useAnswerStore = defineStore('answer', {
             this.resetAnswer();
             if(this.currentViewSurvey ){
                 api.answer.createOneAnswer(answer,this.currentViewSurvey.id).then((response:any)=>{
-                    answerStorage.set(response.data.answer.token)
                     this.currentViewQuestion=this.currentViewSurvey.question.filter((question:any) => question.position == response.data.answer.position)[0]
                     this.currentAnswer.code = response.data.answer.code
-                    
+                    this.currentAnswer.id = response.data.answer.id
+                    answerStorage.set(encodeCode(this.currentViewSurvey.id,this.currentAnswer.code))
+
+
                 }).catch((error) => {
                     this.$patch({
                         errors : {create :error.response.data.message}
                     })
                 })
             }else{
-                console.log("3")
                 this.errors.load = "Error loading"
                 router.push({ name: 'surveyError', params: { error: this.errors } });
             }
@@ -110,11 +145,15 @@ const useAnswerStore = defineStore('answer', {
         },
 
         
-        async createPreAnswer(surveyId:number){
+        async createPreAnswer(surveyId:number,entry:string){
             this.resetAnswer();
             return api.answer.createOneAnswer(this.currentAnswer,surveyId).then((response) => {
-                answerStorage.set(response.data.answer.token)
-                router.push({ path: `/survey/${encodeCode(surveyId, response.data.answer.code)}` });
+                answerStorage.set(encodeCode(surveyId,response.data.answer.code))
+                if(entry == "private"){
+                    router.push({ path: `/survey/${encodeCode(surveyId, response.data.answer.code)}` });
+                }else if(entry == "public"){
+                    router.push({ path: `/survey/${encodeCode(surveyId,"")}` });
+                }
             })
         },
 
@@ -150,7 +189,6 @@ const useAnswerStore = defineStore('answer', {
 
 
             this.saveAnswer().then(response => {
-                console.log( response.data.answer)
 
                 this.currentAnswer.ended = response.data.answer.ended
                 this.currentViewQuestion = this.currentViewSurvey.question.filter((question:any) => question.position == this.currentPosition)[0]
@@ -158,7 +196,7 @@ const useAnswerStore = defineStore('answer', {
         },
 
         checkIfEnded(){
-            return this.currentPosition >= this.currentViewSurvey.question.length
+            return this.currentPosition >= this.currentViewSurvey.question.length -1
         },
 
         saveBody(data:any){

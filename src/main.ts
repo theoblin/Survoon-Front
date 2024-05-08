@@ -11,6 +11,7 @@ import './assets/reco.scss'
 import './assets/satis.scss'
 import './assets/notification.scss'
 import './assets/text.scss'
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'

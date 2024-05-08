@@ -47,7 +47,7 @@ function removeQuestion(id: number) {
 }
 
 function testSurvey() {
-    answerStore.createPreAnswer(surveyStore.currentEditSurvey.id)
+    answerStore.createPreAnswer(surveyStore.currentEditSurvey.id, surveyStore.currentEditSurvey.entry)
 }
 
 function testNotif() {

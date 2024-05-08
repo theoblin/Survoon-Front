@@ -21,9 +21,8 @@ const react: any = reactive({
 watch(
     () => answerStore.currentViewQuestion, function (question, oldVal) {
         if (question) {
-            console.log(question)
             react.title = question.title
-            react.fontSize = question.config[0].fontSize
+            react.fontSize = question.style[0].fontSize
             react.comp = defineAsyncComponent(() => import(`./questionTypes/${question.questionType.name}.vue`));
         }
     },

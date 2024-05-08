@@ -1,6 +1,6 @@
 <template>
     <div v-if="getCurrentEditQuestion" id="surveyQuestion">
-        <component :fontSize="react.fontSize" :title="react.title" :is="react.comp">
+        <component :fontSize="react.fontSize" :title="react.title" :is="react.comp" :editMode="surveyStore.editMode">
         </component>
     </div>
 </template>
@@ -24,7 +24,7 @@ watch(
     () => surveyStore.currentEditQuestion, function (question, oldVal) {
         if (question) {
             react.title = question.title
-            react.fontSize = question.config[0].fontSize
+            react.fontSize = question.style[0].fontSize
             react.comp = defineAsyncComponent(() => import(`./questionTypes/${question.questionType.name}.vue`));
         }
     },

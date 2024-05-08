@@ -111,6 +111,8 @@ const useSurveyStore = defineStore('survey', {
                 this.errors.load=null;
                 await new Promise(resolve => setTimeout(resolve, 1000)); //Sleep to check loading
                 this.isLoading = false
+                this.reorder()
+
                 /* this.displayQuestion( survey.data.survey.question[0].id) */
             }) 
             .catch((error) => {

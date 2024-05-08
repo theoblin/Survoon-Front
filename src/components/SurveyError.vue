@@ -1,6 +1,7 @@
 <template>
     <div id="error">
         <div>
+            ERROR
             {{ props.message }}
         </div>
 

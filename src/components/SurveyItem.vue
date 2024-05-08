@@ -7,6 +7,7 @@
             {{ props.active }}
             {{ props.createdDate }}
             {{ props.languageId }}
+            {{ props.entry }}
         </div>
         <Button @click="editSurvey()">Editer</Button>
         <Button @click="testSurvey()">Tester</Button>
@@ -21,14 +22,14 @@ import useAnswerStore from 'src/stores/answer';
 
 const answerStore = useAnswerStore()
 
-const props = defineProps(['name', 'visibility', 'active', 'languageId', 'createdDate', 'id'])
+const props = defineProps(['name', 'visibility', 'active', 'languageId', 'createdDate', 'id', 'entry'])
 
 function editSurvey() {
     router.push({ path: `/user/survey/${props.id}` });
 }
 
 function testSurvey() {
-    answerStore.createPreAnswer(props.id)
+    answerStore.createPreAnswer(props.id, props.entry)
 }
 
 

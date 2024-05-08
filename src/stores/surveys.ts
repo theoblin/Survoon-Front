@@ -3,9 +3,7 @@ import { api } from 'src/services'
 import { CreateSurvey, Survey } from 'src/services/dto'
 import useUserStore from 'src/stores/user';
 import useModaleStore from './modale';
-import useAnswerStore from './answer';
 import Storage from "../utils/storage"
-import useNotificationStore from 'src/stores/notifications';
 import router from 'src/router';
 const answerStorage = new Storage<string>('answer')
 
@@ -16,10 +14,8 @@ const {
 );
 
   const modaleStore = useModaleStore()
-  const answerStore = useAnswerStore()
-  const notificationStore = useNotificationStore()
 
-  
+
 const useSurveysStore = defineStore('surveys', {
   state: () => ({
     list: [] as  Array<Survey>,
