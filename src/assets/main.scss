@@ -5,16 +5,38 @@ body,html,#app{
     box-sizing:border-box;
     -moz-box-sizing:border-box;
     -webkit-box-sizing:border-box;
+    font-family: "Roboto", sans-serif;
+
 }
-#router_view{
+#router-view{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
-    height: calc(100% - 50px);
+   
+    padding-top: 50px;
+    height: 100%;
+    width: 100%;
     box-sizing:border-box;
     -moz-box-sizing:border-box;
     -webkit-box-sizing:border-box;
 
+    --dot-bg: white;
+    --dot-color: rgb(212, 212, 212);
+    --dot-size: 2px;
+    --dot-space: 23px;
+    background:
+    linear-gradient(90deg, var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+    linear-gradient(var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+    var(--dot-color);
 
+}
+
+.mb-5{
+    margin-bottom: 5px;
+}
+.mb-10{
+    margin-bottom: 10px;
+}
+.mb-15{
+    margin-bottom: 15px;
 }

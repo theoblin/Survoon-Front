@@ -1,0 +1,61 @@
+input[type="submit"],
+input[type="reset"] {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: none;
+  -webkit-appearance: none;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 0s 600000s, color 0s 600000s !important;
+}
+
+#form-group{
+display: flex;
+justify-content: center;
+flex-direction: column;
+
+#input-group{
+display: flex;
+justify-content: center;
+flex-direction: column;
+flex-wrap: wrap;
+}
+}
+
+
+
+#input{
+    padding: 8px;
+    transition: border var(--main-transition);
+    border-radius: var(--main-border-radius);
+    background-color: white;
+    outline: none;
+
+}
+
+#input,.default{
+    color: var(--secondary-text-color-1);
+    border: var(--main-border);
+    box-shadow: var(--main-shadow);
+    transition: border var(--main-transition);
+
+    &:hover{
+        border: var(--secondary-border);
+        transition: border var(--main-transition);
+    }
+    &:focus{
+        border: var(--third-border);
+        transition: border var(--main-transition);
+    }
+  }
+
+#form-error{
+    color:red;
+    font-size:10px;
+}
+

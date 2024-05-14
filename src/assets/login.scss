@@ -1,0 +1,33 @@
+
+#login-page{
+    width: 100%;
+    height: 100%;
+    --dot-bg: white;
+    --dot-color: rgb(212, 212, 212);
+    --dot-size: 2px;
+    --dot-space: 23px;
+    background:
+    linear-gradient(90deg, var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+    linear-gradient(var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+    var(--dot-color);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+      #login-elements{
+        width: 300px;
+        min-width: 200px;
+        background-color: white;
+        border: var(  --main-border);
+        border-radius: var(--main-border-radius);
+        padding: 30px;
+      }
+
+      #actions{
+        display: flex;
+        font-size: 11px;
+        justify-content: space-between;
+      }
+}
+

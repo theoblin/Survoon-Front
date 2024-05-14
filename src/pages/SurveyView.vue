@@ -1,7 +1,6 @@
 <template>
     <div id="surveyEdit">
         <div id="surveyZone">
-            {{ answerStore.errors }}
             <SurveyViewQuestion>
             </SurveyViewQuestion>
         </div>
@@ -12,6 +11,7 @@
 import SurveyViewQuestion from "../components/SurveyViewQuestion.vue";
 import { useRoute } from 'vue-router';
 import useAnswerStore from 'src/stores/answer';
+import Loading from "../components/Loading.vue";
 
 const route = useRoute()
 const answerStore = useAnswerStore()

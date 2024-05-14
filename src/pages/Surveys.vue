@@ -1,17 +1,17 @@
 <template>
 
     <Loading v-if="surveyStore.isLoading"></Loading>
-    <div v-if="!surveyStore.isLoading" id="surveyList">
+    <div v-if="!surveyStore.isLoading" id="survey-list">
         <div v-for="item in getSurveys">
             <SurveyItem :id="item.survey.id" :name="item.survey.name" :link="item.survey.link"
                 :visibility="item.survey.visibility" :active="item.survey.active" :templateId="item.survey.templateId"
-                :languageId="item.survey.language.code" :createdDate="item.survey.createdDate"
-                :entry="item.survey.entry">
+                :language="item.survey.language.code" :createdDate="item.survey.createdDate" :entry="item.survey.entry"
+                :questions="item.survey.question" :lastUpdate="item.survey.lastUpdateDate">
             </SurveyItem>
         </div>
-    </div>
-    <div v-if="!surveyStore.isLoading">
-        <Button @click="openCreateSurveyModale()">Nouveau survey</Button>
+        <div @click="openCreateSurveyModale()" id="item" class="new">
+            <font-awesome-icon :icon="['fas', 'plus']" />
+        </div>
     </div>
     <Modale v-if="getStatus">
         <FormError v-if="surveyStore.errors.create">{{ surveyStore.errors.create }}</FormError>
@@ -20,7 +20,7 @@
             v-model="form.entry"></Select>
         <Select :attrValue="'code'" :attrDisplay="'code'" :options="laguageStore.languageList"
             v-model="form.language"></Select>
-        <Button @click="createSurvey()">Créer</Button>
+        <Button class="create" :bstyle="'default'" @click="createSurvey()">Créer</Button>
     </Modale>
 </template>
 
@@ -39,6 +39,7 @@ import FormError from "../components/FormError.vue";
 import useModaleStore from 'src/stores/modale';
 import { reactive } from 'vue';
 import { CreateSurvey } from 'src/services/dto';
+import useNavStore from 'src/stores/nav';
 
 const {
     getSurveys,
@@ -54,8 +55,11 @@ const {
 const surveyStore = useSurveysStore()
 const modaleStore = useModaleStore()
 const laguageStore = useLanguageStore()
+const navStore = useNavStore()
 
 surveyStore.loadSurveyList()
+
+navStore.setCurrentPage("surveys");
 
 function openCreateSurveyModale() {
     modaleStore.toggle()

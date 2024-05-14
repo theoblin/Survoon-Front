@@ -1,16 +1,20 @@
 <template>
     <div id="reco">
-        <div v-if="!props.editMode" :style="styleObject">{{ question.title }}</div>
-        <InputEdit :style="styleObject" @change="liveUpdate($event, 'title')" v-model="question.title"
-            v-if="props.editMode"></InputEdit>
-        <div v-for="item in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
-            <div @click="choice(item)" :class="item ==
-                question.value ?
-                'reco_item_selected' : 'reco_item'">
-                {{ item }}
+        <div class="title">
+            <div class="title" v-if="!props.editMode" :style="styleObject">{{ question.title }}</div>
+            <InputEdit class="edit" :style="styleObject" @change="liveUpdate($event, 'title')" v-model="question.title"
+                v-if="props.editMode"></InputEdit>
+        </div>
+
+        <div class="digits">
+            <div v-for="item in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
+                <div @click="choice(item)" :class="{ 'selected': item == question.value, 'reco_item': true }">
+                    {{ item }}
+                </div>
             </div>
         </div>
-        <button @click="next()">Next</button>
+
+        <Button :bstyle="'secondary'" @click="next()">Next</Button>
     </div>
 </template>
 
@@ -19,6 +23,7 @@ import useAnswerStore from 'src/stores/answer';
 import useSurveyStore from 'src/stores/survey';
 import { reactive } from 'vue';
 import InputEdit from "../InputEdit.vue";
+import Button from "../Button.vue";
 
 const answerStore = useAnswerStore()
 const surveyStore = useSurveyStore()

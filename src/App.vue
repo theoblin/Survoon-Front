@@ -12,10 +12,10 @@ const notificationStore = useNotificationStore()
 
 <template>
   <Navbar v-if="!$route.meta.hideNavbar" />
-  <div id="router_view">
+  <div id="router-view">
     <RouterView />
   </div>
-  <NotificationList v-if="notificationStore.getNotifications.length > 0">
+  <NotificationList v-if="(notificationStore.getNotifications.length > 0)">
     <div v-for="notif in notificationStore.getNotifications">
       <Notification :message="notif.message" :type="notif.type" :id="notif.id">{{ notif }}</Notification>
     </div>

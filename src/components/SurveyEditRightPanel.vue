@@ -1,15 +1,19 @@
 <template>
     <div id="rightPanel">
-        <Select @change="liveUpdateComp($event)" :placeholder="'Type de question'" :attrDisplay="'name'"
-            :attrValue="'id'" :options="surveyStore.questionsTypes" v-model="selected.questionType"></Select>
-        <InputEdit @input="liveUpdate($event, 'name')" v-model="selected.name"></InputEdit>
-        <Select @change="liveUpdateStyle($event, 'fontSize')" :placeholder="'Taille du titre'" :attrDisplay="'value'"
-            :attrValue="'value'"
-            :options="[{ 'value': '8' }, { 'value': '9' }, { 'value': '10' }, { 'value': '11' }, { 'value': '12' }, { 'value': '14' }, { 'value': '16' }, { 'value': '20' }, { 'value': '22' }, { 'value': '24' }, { 'value': '26' }, { 'value': '28' }, { 'value': '30' }]"
-            v-model="selected.style[0].fontSize"></Select>
+        <div class="body">
+            <Select @change="liveUpdateComp($event)" :placeholder="'Type de question'" :attrDisplay="'name'"
+                :attrValue="'id'" :options="surveyStore.questionsTypes" v-model="selected.questionType"></Select>
+            <Input class="name-input" @input="liveUpdate($event, 'name')" v-model="selected.name"></Input>
+            <Input class="color-input" :type="'color'" @input="liveUpdate($event, 'color')"></Input>
+            <Select @change="liveUpdateStyle($event, 'fontSize')" :placeholder="'Taille du titre'"
+                :attrDisplay="'value'" :attrValue="'value'"
+                :options="[{ 'value': '8' }, { 'value': '9' }, { 'value': '10' }, { 'value': '11' }, { 'value': '12' }, { 'value': '14' }, { 'value': '16' }, { 'value': '20' }, { 'value': '22' }, { 'value': '24' }, { 'value': '26' }, { 'value': '28' }, { 'value': '30' }]"
+                v-model="selected.style[0].fontSize"></Select>
+        </div>
+        <div class="footer">
+            <Button :bstyle="'default'" @click="save()">Save</Button>
+        </div>
 
-
-        <Button @click="save()">Save</Button><br>
 
     </div>
 </template>
@@ -18,7 +22,7 @@
 import useSurveyStore from 'src/stores/survey';
 import { reactive, watch } from 'vue';
 import Select from "../components/Select.vue";
-import InputEdit from "../components/InputEdit.vue";
+import Input from "../components/Input.vue";
 import Button from "../components/Button.vue";
 
 const surveyStore = useSurveyStore()

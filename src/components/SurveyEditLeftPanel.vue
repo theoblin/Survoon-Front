@@ -1,20 +1,26 @@
 <template>
     <div id="leftPanel">
-        <Button @click="addQuestion()">Ajouter une question</Button>
-        <div @click="surveyStore.displayQuestion(item.id)" class="leftPanelQuestionItem"
-            v-for="item in props.listQuestions" :key="item.id">
-            {{ item.name }}
-            {{ item.position }}
-            <div v-if="surveyStore.currentEditQuestion">
-                {{ item.id == surveyStore.currentEditQuestion.id ? "Selectionned" : "" }}
-            </div>
-            <br>
-            <br><br><br><br>
-            <Button @click="removeQuestion(item.id)">Delete</Button>
+        <div class="header">
+            <Button :bstyle="'secondary'" @click="addQuestion()">Ajouter une question</Button>
         </div>
-        <Button @click="testSurvey()">Tester</Button>
-        <Button @click="testNotif()">Tester notif</Button>
+        <div class="body">
+            <div v-for="item in props.listQuestions">
+                <div @click="surveyStore.displayQuestion(item.id)"
+                    :class="{ 'selectioned': (surveyStore.currentEditQuestion ? surveyStore.currentEditQuestion.id == item.id : false), 'leftPanelQuestionItem': true }"
+                    :key="item.id">
+                    <strong class="position">{{ item.position }}.</strong>
+                    <span class="name">{{ item.name }}</span>
 
+                    <div v-if="surveyStore.currentEditQuestion">
+                    </div>
+                    <!--  <Button @click="removeQuestion(item.id)">Delete</Button> -->
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <Button @click="testSurvey()">Tester</Button>
+            <Button @click="testNotif()">Tester notif</Button>
+        </div>
     </div>
 </template>
 
@@ -51,7 +57,7 @@ function testSurvey() {
 }
 
 function testNotif() {
-    notificationStore.addNotificationInQueue("test", "coudsds")
+    notificationStore.addNotificationInQueue("success", "save")
 }
 
 </script>

@@ -1,6 +1,6 @@
 <template>
 
-    <select v-model="model">
+    <select id="select" v-model="model">
         <option value="" disabled selected>{{ props.placeholder ? props.placeholder : "Choose option" }}</option>
         <option :value="option[props.attrValue]" v-for="(option, index) of options" :key="index">{{
             option[props.attrDisplay] }}

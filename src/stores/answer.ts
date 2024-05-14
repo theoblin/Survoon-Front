@@ -18,7 +18,8 @@ const useAnswerStore = defineStore('answer', {
         currentPosition: 1 as number,
         currentBody:[] as Array<AnswerBody>,
         answerCode:null,
-        errors:{load:null as string|null}
+        errors:{load:null as string|null},
+        isLoading:false
     }),
 
     actions: {
@@ -36,11 +37,11 @@ const useAnswerStore = defineStore('answer', {
 
         async init(encodedCode:string){
             this.resetAnswer();
-
-
             const decryptedParam = decodeCode(encodedCode)
             const surveyId = decryptedParam.surveyId
             const answerCode = decryptedParam.answerCode
+
+            this.isLoading = false;
 
             if(answerStorage.get()){
                 const decryptedToken = decodeCode(answerStorage.get())
@@ -111,6 +112,9 @@ const useAnswerStore = defineStore('answer', {
                     this.currentAnswer = response.data.answer
                     this.currentPosition = response.data.answer.position
                     this.restorePosition(response.data.answer.position)
+
+                    this.isLoading = false;
+
 
                 }).catch((error)=>{
                     router.push({ name: 'surveyError', params: { error: error } });

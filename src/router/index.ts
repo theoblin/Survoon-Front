@@ -2,6 +2,7 @@ import useUserStore from 'src/stores/user';
 import { createRouter, createWebHistory } from 'vue-router'
 import Storage from "../utils/storage"
 import {User } from 'src/services/dto'
+import useNavStore from 'src/stores/nav';
 
 
 const router = createRouter({
@@ -11,6 +12,14 @@ const router = createRouter({
       name: 'login',
       path: '/login',
       component: () => import('../pages/Login.vue'),
+      meta: {
+        hideNavbar: true,
+       }
+    },
+    {
+      name: 'resetPassword',
+      path: '/reset-password',
+      component: () => import('../pages/ResetPassword.vue'),
       meta: {
         hideNavbar: true,
        }

@@ -1,4 +1,86 @@
-#surveyItem{
-    border: 1px red solid;
+#item{
     cursor: pointer;
+    border-radius: var(--main-border-radius);
+    padding: 10px;
+    margin: 5px;
+    width: 200px;
+
+    &:hover{
+        background-color: rgba(124, 124, 124, 0.288);
+    }
+
+    .name{
+        margin-bottom:5px
+    }
+
+    .actions{
+        display: flex;
+        margin-top: 30px;
+
+        .action{
+            border-radius: var(--main-border-radius);
+            margin-right: 10px;
+            padding: 3px;
+            &:hover{
+                background-color: var( --main-color-1);
+                color: white;
+            }
+        }
+    
+    }
+
+    .header{
+
+        display: flex;
+        justify-content: space-between;
+
+        .language{
+            width: 15px;
+    
+            .flag{
+                border-radius: 3px;
+            }
+        }
+    }
+
+    .body{
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 55px;
+        margin-top: 10px;
+
+        .icon{
+            font-size: 13px;
+            color: var(--main-color-1);
+            margin-right: 5px;
+        }
+
+        .date{
+            font-size: 13px;
+        }
+        .questions{
+            font-size: 13px;
+        }
+        .update{
+            font-size: 13px;
+        }
+    }
+
+
+}
+
+.survey{
+    background-color: rgb(231, 231, 231);
+
+    
+}
+.new{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(187, 187, 187);
+    background-color: rgba(124, 124, 124, 0.062);
+    border: 1px rgba(0, 0, 0, 0.041) solid;
 }

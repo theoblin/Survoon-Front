@@ -18,6 +18,10 @@ const useUserStore = defineStore('user', {
     },
   },
   actions: {
+    resetErrors(){
+      this.errors = {login:null,signup:null,update:null};
+    },
+
     isAuthenticated(){
       const user = userStorage.get()
       if (!user?.token){
@@ -36,6 +40,7 @@ const useUserStore = defineStore('user', {
     },
     async login(credentials: LoginUser) {
       this.$reset()
+      this.resetErrors();
       api.user.login( credentials )
       .then( (result) => {
         this.$patch({
@@ -62,6 +67,7 @@ const useUserStore = defineStore('user', {
     },
     async signup(credentials: RegisterUser) {
       this.$reset()
+      this.resetErrors();
       api.user.signup( credentials )
       .then( (result) => {
         this.$patch({
@@ -88,6 +94,7 @@ const useUserStore = defineStore('user', {
     },
     logout() {
       this.$reset()
+      this.resetErrors();
       userStorage.remove()
       router.push({ path: "/login" });
     },

@@ -1,11 +1,11 @@
 <template>
     <div>
-        <button :disabled="disabled">
+        <button id="button" :class="props.bstyle" :disabled="disabled">
             <slot></slot>
         </button>
     </div>
 </template>
 
 <script setup lang="ts">
-const props = defineProps(['name', "disabled"])
+const props = defineProps(['name', "disabled", "bstyle"])
 </script>

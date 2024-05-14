@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 const useNotificationStore = defineStore('notification', {
     state: () => ({
         queue:[] as Array<Notification>,
-        displayTime:5000,
+        displayTime:1000,
         max:3
     }),
 

@@ -95,14 +95,14 @@ const useSurveyStore = defineStore('survey', {
                 this.currentEditQuestion = response.data.question 
                 const index = this.currentEditSurvey.question.findIndex((question:Question) => question.id == response.data.question.id)
                 this.currentEditSurvey.question[index] = response.data.question 
-                notificationStore.addNotificationInQueue("test", "coudsds")
+                notificationStore.addNotificationInQueue("success", "Saved")
             }).catch((error) => {
                 this.$patch({
                     errors : {delete :error.response.data.message}
                 })
             })
         },
-        loadSurvey(surveyId:number){
+        async loadSurvey(surveyId:number){
             this.resetState()
             this.resetErrors();
             api.surveys.getUserOneSurveySecure( surveyId )

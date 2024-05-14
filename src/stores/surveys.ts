@@ -58,8 +58,8 @@ const useSurveysStore = defineStore('surveys', {
       api.surveys.crateOneSurvey( surveyData )
       .then( (response) => {
         this.list.push(response.data)
-        modaleStore.toggle()
         this.toggleLoading(false)
+        modaleStore.open = false
         router.push({ path: `/user/survey/${response.data.survey.id}` });
       }) 
       .catch((error) => {

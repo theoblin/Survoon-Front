@@ -1,11 +1,14 @@
 <template>
     <div id="text">
-        <div v-if="!props.editMode" :style="styleObject">{{ question.title }}</div>
-        <InputEdit :style="styleObject" @change="liveUpdate($event, 'title')" v-model="question.title"
-            v-if="props.editMode"></InputEdit>
+        <div class="title">
+            <div class="title" v-if="!props.editMode" :style="styleObject">{{ question.title }}</div>
+            <InputEdit class="edit" :style="styleObject" @change="liveUpdate($event, 'title')" v-model="question.title"
+                v-if="props.editMode"></InputEdit>
+        </div>
         <textarea class="opentext" v-model="model">
         </textarea>
-        <Button @click="next()">Next</Button>
+
+        <Button :bstyle="'secondary'" @click="next()">Next</Button>
 
     </div>
 </template>

@@ -1,6 +1,11 @@
 #notification{
-    border:1px pink solid;
-    padding: 20px;
+    padding: 5px;
+    margin: 10px;
+    width: 150px;
+    text-align: center;
+    border-radius: var(--main-border-radius);
+    opacity: 1;
+    animation: fadeInOut 2s linear 1 forwards;
 }
 
 #notificationlist{
@@ -12,5 +17,38 @@
     justify-content: flex-end;
     align-items: flex-end;
     flex-direction: column;
-    width: 200px;
+    width: 150px;
+
+    .default{
+        background-color: var(--default-notif);
+        color:white
+    }
+    
+    .success{
+        background-color: var(--success-notif);
+        color:white
+    }
+    
+    .warning{
+        background-color: var(--warning-notif);
+        color:white
+    }
+    
+    .danger{
+        background-color: var(--danger-notif);
+        color:white
+    }
+
 }
+
+@keyframes fadeInOut {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
