@@ -8,7 +8,9 @@
             <SurveyEditQuestion>
             </SurveyEditQuestion>
         </div>
-        <SurveyEditRightPanel v-if="getCurrentEditQuestion">
+        <SurveyEditRightPanel v-if="getOpenSurveySetting || getOpenQuestionSetting">
+            <QuestionSettings v-if="getOpenQuestionSetting"></QuestionSettings>
+            <SurveySettings v-if="getOpenSurveySetting"></SurveySettings>
         </SurveyEditRightPanel>
     </div>
 </template>
@@ -21,6 +23,8 @@ import Loading from "../components/Loading.vue";
 import SurveyEditLeftPanel from "../components/SurveyEditLeftPanel.vue";
 import SurveyEditRightPanel from "../components/SurveyEditRightPanel.vue";
 import SurveyEditQuestion from "../components/SurveyEditQuestion.vue";
+import QuestionSettings from "../components/QuestionSettings.vue";
+import SurveySettings from "../components/SurveySettings.vue";
 import { useRoute } from 'vue-router';
 import Storage from "../utils/storage"
 const answerStorage = new Storage<string>('answer')
@@ -30,7 +34,9 @@ const props = defineProps(["editMode"])
 
 const {
     getCurrentEditSurvey,
-    getCurrentEditQuestion
+    getCurrentEditQuestion,
+    getOpenSurveySetting,
+    getOpenQuestionSetting
 } = storeToRefs(
     useSurveyStore()
 );

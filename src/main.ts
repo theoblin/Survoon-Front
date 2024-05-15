@@ -28,7 +28,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import App from './App.vue'
 import router from './router'
 import {faEye, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
-import { faChartLine, faClock, faClockRotateLeft, faList, faLock, faLockOpen, faPlus, faSquareXmark } from '@fortawesome/free-solid-svg-icons'
+import { faChartLine, faClock, faClockRotateLeft, faList, faLock, faLockOpen, faPlus, faSquareXmark,faSquarePollVertical,faFloppyDisk, faTrash, faLink, faGears } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faPenToSquare);
 library.add(faEye);
@@ -40,6 +40,11 @@ library.add(faChartLine);
 library.add(faLock);
 library.add(faLockOpen);
 library.add(faSquareXmark);
+library.add(faSquarePollVertical);
+library.add(faFloppyDisk);
+library.add(faTrash);
+library.add(faLink);
+library.add(faGears);
 
 const app = createApp(App)
 .component("font-awesome-icon", FontAwesomeIcon)

@@ -12,13 +12,14 @@ button{
     width: 100%;
     padding: 10px;
     border-radius: var(--main-border-radius);
-    box-shadow: var(--main-shadow);
     color: var(--third-text-color-1);
 }
 
 .default {
     background-color: var(--main-color-1);
     transition: background-color 0.2s ease-out;
+    box-shadow: var(--main-shadow);
+
 
     &:hover{
         background-color: var(--secondary-color-1);
@@ -30,7 +31,7 @@ button{
     background-color: var(--secondary-color-2);
     transition: background-color 0.2s ease-out;
     color: rgb(187, 187, 187);
-
+    box-shadow: var(--main-shadow);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,4 +41,30 @@ button{
         background-color: var(--secondary-color-2);
         transition: background-color 0.2s ease-out;
     }
+}
+
+.transparent {
+
+    .icon{
+        color:black;
+        &:hover{
+        color: var(--main-color-1);
+   
+        }
+    }
+
+}
+
+.danger {
+
+    background-color: var(--danger-notif);
+
+    .icon{
+        color:white;
+        &:hover{
+        color: var(--main-color-1);
+   
+        }
+    }
+
 }

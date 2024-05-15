@@ -1,36 +1,36 @@
 :root {
 
-      --main-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;  
-      --secondary-shadow: rgba(45, 45, 46, 0.377) 0px 2px 5px -1px,rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  --main-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  --secondary-shadow: rgba(45, 45, 46, 0.377) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 
-      --main-border: 1px rgba(184, 184, 184, 0.336) solid;
-      --secondary-border: 1px rgba(92, 92, 92, 0.336) solid;
-      --third-border:1px rgba(94, 94, 94, 0.521) solid;
-    
-      --main-border-radius: 5px;
-      --secondary-border-radius:3px 3px 3px 3px;
-    
-      --main-color-1:rgba(10, 39, 204, 0.753);
-      --secondary-color-1:rgba(10, 39, 204, 0.884);
+  --main-border: 1px rgba(184, 184, 184, 0.336) solid;
+  --secondary-border: 1px rgba(92, 92, 92, 0.336) solid;
+  --third-border: 1px rgba(94, 94, 94, 0.521) solid;
 
-      --main-color-2:rgb(226, 224, 224);
-      --secondary-color-2:rgb(187, 187, 187);
+  --main-border-radius: 5px;
+  --secondary-border-radius: 3px 3px 3px 3px;
+  --third-border-radius: 15px;
 
-      --main-color-3:rgb(255, 255, 255);
-      --secondary-color-3:rgb(255, 255, 255);
+  --main-color-1: #e94f37;
+  --secondary-color-1: rgba(10, 39, 204, 0.884);
 
+  --main-color-2: rgb(226, 224, 224);
+  --secondary-color-2: #ececee;
 
-      --default-notif: rgb(126, 126, 126);
-      --success-notif: rgb(0, 160, 13);
-      --warning-notif: rgb(255, 123, 0);
-      --danger-notif: rgb(255, 0, 0);
+  --main-color-3: rgb(255, 255, 255);
+  --secondary-color-3: rgb(255, 255, 255);
 
 
-      --main-text-color-1:rgba(37, 37, 37, 0.863);
-      --secondary-text-color-1:rgba(59, 59, 59, 0.863);
-      --third-text-color-1:rgb(253, 253, 253);
-    
-      --main-transition: 0.2s ease-out ;
-    
-    }
-    
+  --default-notif: rgb(126, 126, 126);
+  --success-notif: rgb(0, 160, 13);
+  --warning-notif: rgb(255, 123, 0);
+  --danger-notif: rgb(211, 33, 33);
+
+
+  --main-text-color-1: rgba(37, 37, 37, 0.863);
+  --secondary-text-color-1: rgba(59, 59, 59, 0.863);
+  --third-text-color-1: rgb(253, 253, 253);
+
+  --main-transition: 0.2s ease-out;
+
+}

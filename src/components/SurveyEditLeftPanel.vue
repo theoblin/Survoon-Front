@@ -18,8 +18,8 @@
             </div>
         </div>
         <div class="footer">
-            <Button @click="testSurvey()">Tester</Button>
-            <Button @click="testNotif()">Tester notif</Button>
+            <Button :bstyle="'default'" @click="surveyStore.displaySurveySettings()"><font-awesome-icon
+                    :icon="['fas', 'gears']" /></Button>
         </div>
     </div>
 </template>
@@ -48,16 +48,10 @@ function addQuestion() {
     surveyStore.createQuestion(question)
 }
 
-function removeQuestion(id: number) {
-    surveyStore.removeQuestion(id)
-}
+
 
 function testSurvey() {
     answerStore.createPreAnswer(surveyStore.currentEditSurvey.id, surveyStore.currentEditSurvey.entry)
-}
-
-function testNotif() {
-    notificationStore.addNotificationInQueue("success", "save")
 }
 
 </script>

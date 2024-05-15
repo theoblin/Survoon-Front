@@ -6,8 +6,10 @@
             </div>
         </div>
         <div id="part_2">
-            <router-link :class="{ 'selected': navStore.currentPage == 'surveys', 'link': true }" to="/surveys">Mes
-                surveys</router-link>
+            <router-link :class="{ 'selected': navStore.currentPage == 'surveys', 'link': true }" to="/surveys">
+                <font-awesome-icon :icon="['fas', 'square-poll-vertical']" />Mes
+                surveys
+            </router-link>
             <router-link :class="{ 'selected': navStore.currentPage == 'templates', 'link': true }" to="/templates">Mes
                 templates</router-link>
             <router-link :class="{ 'selected': navStore.currentPage == 'results', 'link': true }" to="">Mes

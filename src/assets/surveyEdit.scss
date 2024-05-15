@@ -1,106 +1,132 @@
-#surveyEdit{
+#surveyEdit {
     display: flex;
     justify-content: space-between;
     height: 100%;
     width: 100%;
 
-    #leftPanel{
+    #leftPanel {
 
         display: flex;
         flex-direction: column;
         justify-content: space-between;
 
-        background-color: var( --main-color-3);
+        background-color: var(--main-color-3);
         width: 300px;
         min-width: 200px;
         max-width: 300px;
 
         padding: 10px;
 
-        box-shadow:var(--main-shadow);
+        box-shadow: var(--main-shadow);
 
 
-        .body{
+        .body {
             height: 100%;
             margin-top: 10px;
-            margin-bottom:10px;
+            margin-bottom: 10px;
             overflow: auto;
-            
 
-            .leftPanelQuestionItem{
+
+            .leftPanelQuestionItem {
                 border: 1px rgb(231, 222, 222) solid;
                 background-color: var(--main-color-2);
                 border-radius: var(--main-border-radius);
                 padding: 5px;
                 margin: 5px;
                 cursor: pointer;
-                transition: 0.3s;                
-                .position{
+                transition: 0.3s;
+
+                .position {
                     font-size: 20px;
                 }
 
-                .name{
+                .name {
                     margin-left: 10px;
                 }
 
-                &:hover{
+                &:hover {
                     background-color: var(--secondary-color-2);
-                    color:var(--third-text-color-1)
+                    color: var(--third-text-color-1)
                 }
 
-           
 
             }
-            .selectioned{
+
+            .selectioned {
                 background-color: var(--secondary-color-2);
-                color:var(--third-text-color-1)
+                color: var(--third-text-color-1)
             }
         }
 
- /* width */
-::-webkit-scrollbar {
-    width: 7px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background-color: var(--main-color-2);
-    border-radius: 10px;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background-color: var(--main-color-1);
-    border-radius: 10px;
-  }
-    
+        /* width */
+        ::-webkit-scrollbar {
+            width: 7px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background-color: var(--main-color-2);
+            border-radius: 10px;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--main-color-1);
+            border-radius: 10px;
+        }
+
     }
 
-        
-    #rightPanel{
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+
+    #rightPanel {
 
         width: 500px;
 
-        box-shadow:var(--main-shadow);
-        background-color: var( --main-color-3);
+        box-shadow: var(--main-shadow);
+        background-color: var(--main-color-3);
         padding: 10px;
 
+
+        .question-setting {
+            height: 100%;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .footer {
+                display: flex;
+                width: 100%;
+                justify-content: space-around;
+
+            }
+        }
+
+        .survey-setting {
+
+            height: 100%;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .footer {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                justify-content: space-around;
+
+            }
+        }
 
     }
 
 
-#surveyZone{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+    #surveyZone {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
 }
-
-
-
-

@@ -14,7 +14,9 @@ const useSurveyStore = defineStore('survey', {
         questionsTypes:[],
         editMode:false as boolean,
         errors : {load:null,create:null,delete:null},
-        isLoading:true
+        isLoading:true,
+        openQuestionSetting:false,
+        openSurveySetting:false,
     }),
     getters:{
         getCurrentEditSurvey(state){
@@ -31,6 +33,12 @@ const useSurveyStore = defineStore('survey', {
         },
         getQuestionsTypes(state){
             return state.questionsTypes
+        },
+        getOpenQuestionSetting(state){
+            return state.openQuestionSetting
+        },
+        getOpenSurveySetting(state){
+            return state.openSurveySetting
         }
     },
     actions: {
@@ -46,6 +54,12 @@ const useSurveyStore = defineStore('survey', {
         displayQuestion(id:number){
             this.resetErrors();
             this.currentEditQuestion = this.currentEditSurvey.question.filter((question) => question.id == id)[0]
+            this.openQuestionSetting=true;
+            this.openSurveySetting=false;
+        },
+        displaySurveySettings(){
+            this.openSurveySetting=!this.openSurveySetting;
+            this.openQuestionSetting=false;
         },
         reorder(){
             this.currentEditSurvey.question= this.currentEditSurvey.question.sort(function(a,b) { return parseFloat(a.position) - parseFloat(b.position) } )
