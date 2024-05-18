@@ -1,34 +1,36 @@
-
-#signup-page{
-    width: 100%;
-    height: 100%;
-    --dot-bg: white;
-    --dot-color: rgb(212, 212, 212);
-    --dot-size: 2px;
-    --dot-space: 23px;
-    background:
+#signup-page {
+  width: 100%;
+  height: 100%;
+  --dot-bg: var(--secondary-color);
+  --dot-color: rgba(22, 22, 22, 0.37);
+  --dot-size: 2px;
+  --dot-space: 23px;
+  background:
     linear-gradient(90deg, var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
     linear-gradient(var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
     var(--dot-color);
 
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  #signup-elements {
+    width: 300px;
+    min-width: 200px;
+    background-color: var(--main-color-3);
+    box-shadow: var(--main-shadow);
+    border: 0.1px var(--main-color-3) solid;
+    border-radius: var(--third-border-radius);
+    padding: 30px;
+
+    background-color: var(--white);
+
+  }
+
+  #actions {
     display: flex;
-    justify-content: center;
-    align-items: center;
-
-      #signup-elements{
-        width: 300px;
-        min-width: 200px;
-        background-color: white;
-        box-shadow:0 0 #0000,0 0 #0000, 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -4px rgba(0,0,0,.1);
-        border: 0.1px #ececee solid;
-        border-radius: var(--third-border-radius);
-        padding: 30px;
-      }
-
-      #actions{
-        display: flex;
-        font-size: 11px;
-        justify-content: space-between;
-      }
+    font-size: 11px;
+    justify-content: space-between;
+  }
 }
-

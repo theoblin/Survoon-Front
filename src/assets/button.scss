@@ -1,28 +1,28 @@
-button{
-  background: none;
-  color: inherit;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
+button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
 }
 
-#button{
+#button {
     width: 100%;
     padding: 10px;
     border-radius: var(--main-border-radius);
-    color: var(--third-text-color-1);
+    color: var(--third-text-color);
 }
 
 .default {
-    background-color: var(--main-color-1);
+    background-color: var(--main-color);
     transition: background-color 0.2s ease-out;
     box-shadow: var(--main-shadow);
 
 
-    &:hover{
-        background-color: var(--secondary-color-1);
+    &:hover {
+        background-color: var(--secondary-color);
         transition: background-color 0.2s ease-out;
     }
 }
@@ -37,7 +37,7 @@ button{
     align-items: center;
     border: 1px rgba(0, 0, 0, 0.041) solid;
 
-    &:hover{
+    &:hover {
         background-color: var(--secondary-color-2);
         transition: background-color 0.2s ease-out;
     }
@@ -45,11 +45,12 @@ button{
 
 .transparent {
 
-    .icon{
-        color:black;
-        &:hover{
-        color: var(--main-color-1);
-   
+    .icon {
+        color: black;
+
+        &:hover {
+            color: var(--main-color);
+
         }
     }
 
@@ -59,11 +60,12 @@ button{
 
     background-color: var(--danger-notif);
 
-    .icon{
-        color:white;
-        &:hover{
-        color: var(--main-color-1);
-   
+    .icon {
+        color: white;
+
+        &:hover {
+            color: var(--main-color);
+
         }
     }
 

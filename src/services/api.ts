@@ -1,6 +1,6 @@
 import axios from "axios";
 import { CONFIG } from "../../config";
-import { Answer, CreateAnswer, CreateQuestion, CreateSurvey, LoginUser, Question, RegisterUser, UpdateAnswer, UpdateQuestion, UpdateUser, User } from "./dto";
+import { Answer, CreateAnswer, CreateQuestion, CreateSurvey, LoginUser, Question, RegisterUser, Survey, UpdateAnswer, UpdateQuestion, UpdateSurvey, UpdateUser, User } from "./dto";
 import Storage from "../utils/storage"
 
 const baseUrl =  `${CONFIG.API_HOST}`
@@ -47,6 +47,12 @@ export class Api{
       },
       crateOneSurvey:(survey:CreateSurvey) =>{
         return axios.post(baseUrl+`/survey/create`,{survey:survey}, {headers: {'Authorization': `Bearer ${userStorage.get().token}`}})
+      },
+      updateOneSurvey:(survey:UpdateSurvey) => {
+        return axios.put(baseUrl+`/survey`,{survey:survey}, {headers: {'Authorization': `Bearer ${userStorage.get().token}`}})
+      },
+      deleteOneSurvey:(id:number) =>{
+        return axios.delete(baseUrl+`/survey/${id}`, {headers: {'Authorization': `Bearer ${userStorage.get().token}`}})
       },
     }
 

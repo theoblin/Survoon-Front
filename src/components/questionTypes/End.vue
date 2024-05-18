@@ -1,5 +1,5 @@
 <template>
-    <div id="text">
+    <div id="end">
         <textarea :style="styleObject" v-if="editMode" class="opentext" v-model="question.title"
             @change="liveUpdate($event, 'title')">
         </textarea>

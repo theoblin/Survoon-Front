@@ -2,7 +2,9 @@
   <div id="login-page">
     <div id="login-elements">
       <h3>Connexion</h3>
-      <FormError id="form-error" v-if="userStore.errors.login">{{ userStore.errors.login }}</FormError>
+      <FormError id="form-error" v-if="userStore.errors.filter((error) => error.type == 'login')">{{
+        userStore.errors.filter((error) => error.type == 'login')
+      }}</FormError>
       <form id="form-group" ref="formRef" aria-label="Login form" @submit.prevent="login">
         <div id="input-group">
           <Input class="mb-10 default" :type="'email'" :placeholder="'Email'" :required="true"

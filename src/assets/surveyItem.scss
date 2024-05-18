@@ -1,86 +1,84 @@
-#item{
+#item {
     cursor: pointer;
     border-radius: var(--main-border-radius);
-    padding: 10px;
-    margin: 5px;
-    width: 200px;
+    padding: 15px;
+    margin-left: 15px;
+    margin-bottom: 15px;
 
-    &:hover{
-        background-color: rgba(124, 124, 124, 0.288);
+    width: auto;
+    box-shadow: var(--main-shadow);
+
+    &:hover {
+
+        outline: var(--main-border);
+        box-shadow: var(--secondary-shadow);
+
     }
 
-    .name{
-        margin-bottom:5px
+    .name {
+        margin-bottom: 5px
     }
 
-    .actions{
+    .actions {
         display: flex;
         margin-top: 30px;
 
-        .action{
+        .action {
             border-radius: var(--main-border-radius);
             margin-right: 10px;
             padding: 3px;
-            &:hover{
-                background-color: var( --main-color-1);
-                color: white;
+
+            &:hover {
+                background-color: var(--main-color);
+                color: var(--white);
             }
         }
-    
+
     }
 
-    .header{
+    .header {
 
         display: flex;
         justify-content: space-between;
 
-        .language{
+        .language {
             width: 15px;
-    
-            .flag{
+
+            .flag {
                 border-radius: 3px;
             }
         }
     }
 
-    .body{
+    .body {
 
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        height: 55px;
         margin-top: 10px;
 
-        .icon{
+        .icon {
             font-size: 13px;
-            color: var(--main-color-1);
+            color: var(--main-color);
             margin-right: 5px;
         }
 
-        .date{
+        span {
             font-size: 13px;
+            display: flex;
+            justify-content: start;
+            margin-top: 2px;
+
+            border-radius: var(--main-border-radius);
+            padding: 4px;
+
         }
-        .questions{
-            font-size: 13px;
-        }
-        .update{
-            font-size: 13px;
-        }
+
     }
 
 
 }
 
-.survey{
-    background-color: rgb(231, 231, 231);
-
-    
-}
-.new{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: rgb(187, 187, 187);
-    background-color: rgba(124, 124, 124, 0.062);
-    border: 1px rgba(0, 0, 0, 0.041) solid;
+.survey {
+    background-color: var(--white);
 }

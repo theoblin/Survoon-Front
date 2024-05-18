@@ -1,19 +1,23 @@
 <template>
-    <div id="profile">
-        <FormError v-if="userStore.errors.update">{{ userStore.errors.update }}</FormError>
-        <Input :type="'email'" v-model="fromStore.email" :placeholderValue="'Email'"></Input><br>
-        <Button @click="updateEmail()">Update email</Button><br>
-        <div>{{ getUser ? getUser.createdDate : "createdDate error" }}</div><br>
-        <div>{{ fromStore.type ? fromStore.type : "type error" }}</div><br>
-        <FormError v-if="laguageStore.errors.load">{{ laguageStore.errors.load }}</FormError>
-        <Select :attrValue="'code'" :attrDisplay="'code'" @change="updateLanguage()"
-            :options="laguageStore.languageList" v-model="fromStore.language"></Select><br>
-        <div>
-            <Input :type="'password'" v-model="fromStore.password" :placeholderValue="'password'"></Input><br>
-            <Input :placeholder="'confirm'" :type="'password'" v-model="fromStore.passwordConfirm" /><br>
+    <div id="profile-page">
+        <div id="profile-form">
+            <FormError id="form-error" v-if="userStore.errors.filter((error) => error.type == 'update')">{{
+                userStore.errors.filter((error) => error.type == 'update')
+            }}</FormError>
+            <Input :type="'email'" v-model="fromStore.email" :placeholderValue="'Email'"></Input><br>
+            <Button :bstyle="'default'" @click="updateEmail()">Update email</Button><br>
+            <div>{{ getUser ? getUser.createdDate : "createdDate error" }}</div><br>
+            <div>{{ fromStore.type ? fromStore.type : "type error" }}</div><br>
+            <FormError v-if="laguageStore.errors.load">{{ laguageStore.errors.load }}</FormError>
+            <Select :attrValue="'code'" :attrDisplay="'code'" @change="updateLanguage()"
+                :options="laguageStore.languageList" v-model="fromStore.language"></Select><br>
+            <div>
+                <Input :type="'password'" v-model="fromStore.password" :placeholderValue="'password'"></Input><br>
+                <Input :placeholder="'confirm'" :type="'password'" v-model="fromStore.passwordConfirm" /><br>
+            </div>
+            <Button :bstyle="'default'" @click="updatePassword()">Update password</Button><br>
+            <Button :bstyle="'default'" @click="deleteAccount">Delete account</Button><br>
         </div>
-        <Button @click="updatePassword()">Update password</Button><br>
-        <Button @click="deleteAccount">Delete account</Button><br>
     </div>
 </template>
 

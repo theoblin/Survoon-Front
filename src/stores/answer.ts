@@ -1,6 +1,6 @@
 import {defineStore } from 'pinia'
 import { api } from 'src/services';
-import {Answer, AnswerBody, CreateAnswer, Question, Survey, UpdateAnswer } from 'src/services/dto'
+import {Answer, AnswerBody, CreateAnswer, Question, Survey, Error } from 'src/services/dto'
 import Storage from "../utils/storage"
 import { jwtDecode } from "jwt-decode";
 import router from 'src/router';
@@ -17,15 +17,16 @@ const useAnswerStore = defineStore('answer', {
         currentAnswer:{token:"",id:0,body:[],valid:false,language:"",code:"",createdDate:new Date(),lastUpdateDate:new Date(),ended:false,position:1} as Answer|null,
         currentPosition: 1 as number,
         currentBody:[] as Array<AnswerBody>,
-        answerCode:null,
-        errors:{load:null as string|null},
-        isLoading:false
+        answerCode:null as string|null,
+        errors : [] as Array<Error>,
+        isLoading:false as boolean,
+        testMode:false as boolean
     }),
 
     actions: {
 
         resetErrors(){
-            this.errors = {load:null}
+            this.errors = [] as Array<Error>
         },
 
         resetAnswer(){
@@ -93,9 +94,7 @@ const useAnswerStore = defineStore('answer', {
             .then( (response) => {
                 this.currentViewSurvey = response.data.survey
             }).catch((error) => {
-                this.$patch({
-                    errors : {load :error.response.data.message}
-                })
+                this.errors.push({name:'error',message:error.response.data.message,type:'load'}) 
             })
         },
 
@@ -108,13 +107,11 @@ const useAnswerStore = defineStore('answer', {
                         this.currentBody.push(question)
                     }); 
 
-
                     this.currentAnswer = response.data.answer
                     this.currentPosition = response.data.answer.position
                     this.restorePosition(response.data.answer.position)
 
                     this.isLoading = false;
-
 
                 }).catch((error)=>{
                     router.push({ name: 'surveyError', params: { error: error } });
@@ -135,11 +132,8 @@ const useAnswerStore = defineStore('answer', {
                     this.currentAnswer.id = response.data.answer.id
                     answerStorage.set(encodeCode(this.currentViewSurvey.id,this.currentAnswer.code))
 
-
                 }).catch((error) => {
-                    this.$patch({
-                        errors : {create :error.response.data.message}
-                    })
+                    this.errors.push({name:'error',message:error.response.data.message,type:'create'}) 
                 })
             }else{
                 this.errors.load = "Error loading"
@@ -154,8 +148,10 @@ const useAnswerStore = defineStore('answer', {
             return api.answer.createOneAnswer(this.currentAnswer,surveyId).then((response) => {
                 answerStorage.set(encodeCode(surveyId,response.data.answer.code))
                 if(entry == "private"){
+                    this.testMode = true
                     router.push({ path: `/survey/${encodeCode(surveyId, response.data.answer.code)}` });
                 }else if(entry == "public"){
+                    this.testMode = true
                     router.push({ path: `/survey/${encodeCode(surveyId,"")}` });
                 }
             })
@@ -190,7 +186,6 @@ const useAnswerStore = defineStore('answer', {
             this.saveBody(value)
             this.currentAnswer.body=this.currentBody
             this.currentAnswer.ended = this.checkIfEnded()
-
 
             this.saveAnswer().then(response => {
 

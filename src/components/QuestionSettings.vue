@@ -1,14 +1,34 @@
 <template>
     <div class="question-setting">
         <div class="body">
-            <Select @change="liveUpdateComp($event)" :placeholder="'Type de question'" :attrDisplay="'name'"
-                :attrValue="'id'" :options="surveyStore.questionsTypes" v-model="selected.questionType"></Select>
-            <Input class="name-input" @input="liveUpdate($event, 'name')" v-model="selected.name"></Input>
-            <Input class="color-input" :type="'color'" @input="liveUpdate($event, 'color')"></Input>
-            <Select @change="liveUpdateStyle($event, 'fontSize')" :placeholder="'Taille du titre'"
-                :attrDisplay="'value'" :attrValue="'value'"
-                :options="[{ 'value': '8' }, { 'value': '9' }, { 'value': '10' }, { 'value': '11' }, { 'value': '12' }, { 'value': '14' }, { 'value': '16' }, { 'value': '20' }, { 'value': '22' }, { 'value': '24' }, { 'value': '26' }, { 'value': '28' }, { 'value': '30' }]"
-                v-model="selected.style[0].fontSize"></Select>
+            <div class="item">
+                <span>Type </span>
+                <Select @change="liveUpdateComp($event)" :placeholder="'Type de question'" :attrDisplay="'name'"
+                    :attrValue="'id'" :options="surveyStore.questionsTypes" v-model="selected.questionType"></Select>
+            </div>
+            <div class="item">
+                <span>Name </span>
+                <Input class="name-input item" @input="liveUpdate($event, 'name')" v-model="selected.name"></Input>
+            </div>
+            <div class="item">
+                <span>Code </span>
+                <Input class="name-input item" @input="liveUpdate($event, 'name')"></Input>
+            </div>
+            <div class="category">Title</div>
+            <div class="items-group">
+                <div class="item">
+                    <span>Color </span>
+                    <Input class="color-input item" :type="'color'" @input="liveUpdate($event, 'color')"></Input>
+                </div>
+                <div class="item">
+                    <span>Size</span>
+                    <Select class="item" @change="liveUpdateStyle($event, 'fontSize')" :placeholder="'Taille du titre'"
+                        :attrDisplay="'value'" :attrValue="'value'"
+                        :options="[{ 'value': '8' }, { 'value': '9' }, { 'value': '10' }, { 'value': '11' }, { 'value': '12' }, { 'value': '14' }, { 'value': '16' }, { 'value': '20' }, { 'value': '22' }, { 'value': '24' }, { 'value': '26' }, { 'value': '28' }, { 'value': '30' }]"
+                        v-model="selected.style[0].fontSize"></Select>
+                </div>
+            </div>
+
         </div>
         <div class="footer">
             <Button :bstyle="'transparent'" @click="save()"><font-awesome-icon class="icon"

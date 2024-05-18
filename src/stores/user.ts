@@ -1,6 +1,6 @@
 import {defineStore } from 'pinia'
 import { jwtDecode } from "jwt-decode";
-import { DecodedUserFromToken, LoginUser, RegisterUser, User } from 'src/services/dto'
+import { DecodedUserFromToken, LoginUser, RegisterUser, User,Error } from 'src/services/dto'
 import { api } from 'src/services';
 import Storage from "../utils/storage"
 import router from 'src/router';
@@ -10,7 +10,7 @@ const userStorage = new Storage<User>('user')
 const useUserStore = defineStore('user', {
   state: () => ({
     user: undefined as User | undefined,
-    errors: {login:null,signup:null,update:null},
+    errors : [] as Array<Error>,
   }),
   getters:{
     getUser(){
@@ -19,7 +19,7 @@ const useUserStore = defineStore('user', {
   },
   actions: {
     resetErrors(){
-      this.errors = {login:null,signup:null,update:null};
+      this.errors = [] as Array<Error>
     },
 
     isAuthenticated(){
@@ -60,9 +60,7 @@ const useUserStore = defineStore('user', {
       })
       .catch((error) => {
         this.errors.login = null
-        this.$patch({
-          errors : {login :error.response.data.message}
-        })
+        this.errors.push({name:'error',message:error.response.data.message,type:'login'}) 
       })
     },
     async signup(credentials: RegisterUser) {
@@ -87,9 +85,7 @@ const useUserStore = defineStore('user', {
       })
       .catch((error) => {
         this.errors.signup = null
-          this.$patch({
-            errors : {signup :error.response.data.message}
-          })
+        this.errors.push({name:'error',message:error.response.data.message,type:'signup'}) 
       })
     },
     logout() {
@@ -104,12 +100,12 @@ const useUserStore = defineStore('user', {
       .then( (result) => {
         userStorage.remove()
         router.push({ path: "/login" });
-      }).catch((deleteError) => {
-        console.log(deleteError)
+      }).catch((error) => {
+        this.errors.push({name:'error',message:error.response.data.message,type:'delete'}) 
       })
     },
     updateUser(id:number,user:any){
-      this.errors = {login:"",signup:"",email:"",password:""}
+     this.resetErrors()
       this.$reset()
       api.user.updateOne( id,user )
       .then( (result) => {
@@ -124,10 +120,7 @@ const useUserStore = defineStore('user', {
         })
         userStorage.set(result.data.user)
       }).catch((error) => {
-        console.log(error);
-        this.$patch({
-          errors : {update :error.response.data.message}
-        })
+        this.errors.push({name:'error',message:error.response.data.message,type:'update'}) 
       })
 
     }

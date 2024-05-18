@@ -1,6 +1,7 @@
 import {defineStore } from 'pinia'
+import router from 'src/router';
 import { api } from 'src/services'
-import { CreateQuestion, Question, Survey, UpdateQuestion } from 'src/services/dto'
+import { CreateQuestion, Question, Survey, UpdateQuestion, UpdateSurvey,Error } from 'src/services/dto'
 import useNotificationStore from 'src/stores/notifications';
 
 const notificationStore = useNotificationStore()
@@ -11,12 +12,12 @@ const useSurveyStore = defineStore('survey', {
         currentReadQuestion:null as Question|null,
         currentEditSurvey :null as Survey|null,
         currentReadSurvey :null as Survey|null,
-        questionsTypes:[],
+        questionsTypes:[] as Array<Survey>,
         editMode:false as boolean,
-        errors : {load:null,create:null,delete:null},
-        isLoading:true,
-        openQuestionSetting:false,
-        openSurveySetting:false,
+        errors : [] as Array<Error>,
+        isLoading:true as boolean,
+        openQuestionSetting:false as boolean,
+        openSurveySetting:false as boolean,
     }),
     getters:{
         getCurrentEditSurvey(state){
@@ -43,13 +44,15 @@ const useSurveyStore = defineStore('survey', {
     },
     actions: {
         resetErrors(){
-            this.errors = {load:null,create:null,delete:null}
+            this.errors = [] as Array<Error>
         },
         resetState(){
             this.currentEditQuestion = null;
             this.currentEditSurvey = null;
             this.currentReadQuestion = null;
             this.currentReadSurvey = null;
+            this.openQuestionSetting=false;
+            this.openSurveySetting=false;
         },
         displayQuestion(id:number){
             this.resetErrors();
@@ -74,9 +77,7 @@ const useSurveyStore = defineStore('survey', {
                 this.currentEditSurvey.question.push(response.data.question)
                 this.currentEditQuestion = response.data.question
             }).catch((error) => {
-                this.$patch({
-                    errors : {create :error.response.data.message}
-                })
+                this.errors.push({name:'error',message:error.response.data.message,type:'create'}) 
             })
         },
         removeQuestion(id:number){
@@ -97,9 +98,7 @@ const useSurveyStore = defineStore('survey', {
                 this.currentEditQuestion = this.currentEditSurvey.question.slice(-1)[0]
                 this.reorder()
             }).catch((error) => {
-                this.$patch({
-                    errors : {delete :error.response.data.message}
-                })
+                this.errors.push({name:'error',message:error.response.data.message,type:'delete'}) 
             })
         },
         updateQuestion(question:UpdateQuestion,surveyId:number){
@@ -111,9 +110,18 @@ const useSurveyStore = defineStore('survey', {
                 this.currentEditSurvey.question[index] = response.data.question 
                 notificationStore.addNotificationInQueue("success", "Saved")
             }).catch((error) => {
-                this.$patch({
-                    errors : {delete :error.response.data.message}
-                })
+                this.errors.push({name:'error',message:error.response.data.message,type:'delete'}) 
+            })
+        },
+        async updateSurvey(survey:UpdateSurvey){
+            api.surveys.updateOneSurvey(survey).then(response =>{
+                notificationStore.addNotificationInQueue("success","Saved")
+            })
+        },
+        async deleteSurvey(surveyId:number){
+            api.surveys.deleteOneSurvey(surveyId).then(response =>{
+                notificationStore.addNotificationInQueue("success","Deleted")
+                router.push({ path: `/surveys` });
             })
         },
         async loadSurvey(surveyId:number){
@@ -126,13 +134,9 @@ const useSurveyStore = defineStore('survey', {
                 await new Promise(resolve => setTimeout(resolve, 1000)); //Sleep to check loading
                 this.isLoading = false
                 this.reorder()
-
-                /* this.displayQuestion( survey.data.survey.question[0].id) */
             }) 
             .catch((error) => {
-                this.$patch({
-                    errors : {load :error.response.data.message}
-                })
+                this.errors.push({name:'error',message:error.response.data.message,type:'load'}) 
             })
         },
         loadQuestionsTypes(){
@@ -144,9 +148,7 @@ const useSurveyStore = defineStore('survey', {
                     this.questionsTypes.push(type.questionType)
                 });
             }).catch((error) => {
-                this.$patch({
-                    errors : {load :error.response.data.message}
-                })
+                this.errors.push({name:'error',message:error.response.data.message,type:'load'}) 
             })
         },
         getOneQuestionType(id:number){

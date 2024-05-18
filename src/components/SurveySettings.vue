@@ -1,30 +1,51 @@
 <template>
     <div class="survey-setting">
         <div class="body">
-            <span>
-                <Input class="name-input" v-model="selected.name"></Input>
-            </span>
-            <span>
-                <font-awesome-icon class="icon" :icon="['fas', 'link']" />
-                <Input v-model="selected.name"></Input>
-            </span>
+            <div class="item">
+                <span>Name</span>
+                <Input class=" name-input" v-model="selected.name"></Input>
+            </div>
+            <div class="item">
+                <span>Link</span>
+                <Input v-model="selected.link"></Input>
+            </div>
+            <div class="item">
+                <span>Visiblity</span>
+                <Select :attrDisplay="'value'" :attrValue="'value'"
+                    :options="[{ 'value': 'private' }, { 'value': 'public' }]" v-model="selected.entry"></Select>
+
+            </div>
+
+            <div class="item">
+                <span>Background</span>
+                <div class="style">
+                    <div class="item">
+                        <span>Toggle </span>
+                        <input type="checkbox" id="scales" name="scales" v-model="background"
+                            @input="liveUpdate($event, 'background-toggle')" />
+                        <span>Color </span>
+                        <Input class="color-input item" :type="'color'" @input="liveUpdate($event, 'color')"></Input>
+                    </div>
+                </div>
+            </div>
 
         </div>
         <div class="footer">
-            <Button :bstyle="'danger'"><font-awesome-icon class="icon" :icon="['fas', 'trash']" /> Delete
-                survey</Button>
-            <Button :bstyle="'danger'"><font-awesome-icon class="icon" :icon="['fas', 'lock']" /> Visibility</Button>
+            <Button :bstyle="'transparent'" @click="updateSurvey()"><font-awesome-icon class="icon"
+                    :icon="['fas', 'floppy-disk']" /></Button>
+            <Button :bstyle="'transparent'" @click="removeSurvey()"><font-awesome-icon class="icon delete"
+                    :icon="['fas', 'trash']" /></Button>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import useSurveyStore from 'src/stores/survey';
-import { reactive, watch } from 'vue';
-import Select from "../components/Select.vue";
+import { reactive, ref, watch } from 'vue';
 import Input from "../components/Input.vue";
 import Button from "../components/Button.vue";
 import useAnswerStore from 'src/stores/answer';
+import Select from "../components/Select.vue";
 
 const surveyStore = useSurveyStore()
 const answerStore = useAnswerStore()
@@ -34,44 +55,37 @@ surveyStore.loadQuestionsTypes()
 const selected: any = reactive({
     id: null,
     name: null,
-    title: null,
-    questionType: null,
-    style: [{ "fontSize": null }],
+    link: null,
+    entry: null
+
 })
 
+const background = ref(true)
+
+
 watch(
-    () => surveyStore.currentEditQuestion, function (question, oldVal) {
-        if (question) {
-            selected.id = question.id
-            selected.title = question.title
-            selected.name = question.name
-            selected.style[0].fontSize = question.style[0].fontSize
-            selected.questionType = question.questionType.id
+    () => surveyStore.currentEditSurvey, function (survey, oldVal) {
+        if (survey) {
+            selected.id = survey.id
+            selected.name = survey.name
+            selected.link = 'http://localhost:5173/survey/' + survey.link
+            selected.entry = survey.entry
         }
     },
     { deep: true, immediate: true },
 );
-function liveUpdateStyle(event: any, element: string) {
-    surveyStore.currentEditQuestion.style[0][element] = event.target.value
+
+function updateSurvey() {
+    surveyStore.updateSurvey(selected)
+}
+
+function removeSurvey() {
+    surveyStore.deleteSurvey(selected.id)
 }
 
 function liveUpdate(event: any, element: string) {
-    surveyStore.currentEditQuestion[element] = event.target.value
-}
-
-function liveUpdateComp(event: any) {
-    surveyStore.getOneQuestionType(event.target.value).then((response) => {
-        surveyStore.currentEditQuestion.questionType = response.data.questionType
-    })
-}
-
-function save() {
-    selected.id = surveyStore.currentEditQuestion.id;
-    surveyStore.updateQuestion(selected, surveyStore.currentEditSurvey.id)
-}
-
-function removeQuestion(id: number) {
-    surveyStore.removeQuestion(id)
+    surveyStore.currentEditSurvey.config[0][element] = background.value
+    surveyStore.currentReadSurvey.config[0][element] = background.value
 }
 
 function testSurvey() {

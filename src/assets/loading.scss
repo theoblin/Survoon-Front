@@ -3,65 +3,77 @@
  * Dot Bricks
  * ==============================================
  */
- .dot-bricks {
-    position: relative;
-    top: 8px;
-    left: -9999px;
-    width: 10px;
-    height: 10px;
-    border-radius: 5px;
-    background-color: var(--main-color-1);
-    color: var(--main-color-1);
-    box-shadow: 9991px -16px 0 0 var(--main-color-1), 9991px 0 0 0 var(--main-color-1), 10007px 0 0 0 var(--main-color-1);
-    animation: dot-bricks 2s infinite ease;
-  }
-  
-  @keyframes dot-bricks {
-    0% {
-      box-shadow: 9991px -16px 0 0 var(--main-color-1), 9991px 0 0 0 var(--main-color-1), 10007px 0 0 0 var(--main-color-1);
-    }
-    8.333% {
-      box-shadow: 10007px -16px 0 0 var(--main-color-1), 9991px 0 0 0 var(--main-color-1), 10007px 0 0 0 var(--main-color-1);
-    }
-    16.667% {
-      box-shadow: 10007px -16px 0 0 var(--main-color-1), 9991px -16px 0 0 var(--main-color-1), 10007px 0 0 0 var(--main-color-1);
-    }
-    25% {
-      box-shadow: 10007px -16px 0 0 var(--main-color-1), 9991px -16px 0 0 var(--main-color-1), 9991px 0 0 0 var(--main-color-1);
-    }
-    33.333% {
-      box-shadow: 10007px 0 0 0 var(--main-color-1), 9991px -16px 0 0 var(--main-color-1), 9991px 0 0 0 var(--main-color-1);
-    }
-    41.667% {
-      box-shadow: 10007px 0 0 0 var(--main-color-1), 10007px -16px 0 0 var(--main-color-1), 9991px 0 0 0 var(--main-color-1);
-    }
-    50% {
-      box-shadow: 10007px 0 0 0 var(--main-color-1), 10007px -16px 0 0 var(--main-color-1), 9991px -16px 0 0 var(--main-color-1);
-    }
-    58.333% {
-      box-shadow: 9991px 0 0 0 var(--main-color-1), 10007px -16px 0 0 var(--main-color-1), 9991px -16px 0 0 var(--main-color-1);
-    }
-    66.666% {
-      box-shadow: 9991px 0 0 0 var(--main-color-1), 10007px 0 0 0 var(--main-color-1), 9991px -16px 0 0 var(--main-color-1);
-    }
-    75% {
-      box-shadow: 9991px 0 0 0 var(--main-color-1), 10007px 0 0 0 var(--main-color-1), 10007px -16px 0 0 var(--main-color-1);
-    }
-    83.333% {
-      box-shadow: 9991px -16px 0 0 var(--main-color-1), 10007px 0 0 0 var(--main-color-1), 10007px -16px 0 0 var(--main-color-1);
-    }
-    91.667% {
-      box-shadow: 9991px -16px 0 0 var(--main-color-1), 9991px 0 0 0 var(--main-color-1), 10007px -16px 0 0 var(--main-color-1);
-    }
-    100% {
-      box-shadow: 9991px -16px 0 0 var(--main-color-1), 9991px 0 0 0 var(--main-color-1), 10007px 0 0 0 var(--main-color-1);
-    }
+.dot-bricks {
+  position: relative;
+  top: 8px;
+  left: -9999px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: var(--main-color);
+  color: var(--main-color);
+  box-shadow: 9991px -16px 0 0 var(--main-color), 9991px 0 0 0 var(--main-color), 10007px 0 0 0 var(--main-color);
+  animation: dot-bricks 2s infinite ease;
+}
+
+@keyframes dot-bricks {
+  0% {
+    box-shadow: 9991px -16px 0 0 var(--main-color), 9991px 0 0 0 var(--main-color), 10007px 0 0 0 var(--main-color);
   }
 
-  .loading{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  8.333% {
+    box-shadow: 10007px -16px 0 0 var(--main-color), 9991px 0 0 0 var(--main-color), 10007px 0 0 0 var(--main-color);
   }
+
+  16.667% {
+    box-shadow: 10007px -16px 0 0 var(--main-color), 9991px -16px 0 0 var(--main-color), 10007px 0 0 0 var(--main-color);
+  }
+
+  25% {
+    box-shadow: 10007px -16px 0 0 var(--main-color), 9991px -16px 0 0 var(--main-color), 9991px 0 0 0 var(--main-color);
+  }
+
+  33.333% {
+    box-shadow: 10007px 0 0 0 var(--main-color), 9991px -16px 0 0 var(--main-color), 9991px 0 0 0 var(--main-color);
+  }
+
+  41.667% {
+    box-shadow: 10007px 0 0 0 var(--main-color), 10007px -16px 0 0 var(--main-color), 9991px 0 0 0 var(--main-color);
+  }
+
+  50% {
+    box-shadow: 10007px 0 0 0 var(--main-color), 10007px -16px 0 0 var(--main-color), 9991px -16px 0 0 var(--main-color);
+  }
+
+  58.333% {
+    box-shadow: 9991px 0 0 0 var(--main-color), 10007px -16px 0 0 var(--main-color), 9991px -16px 0 0 var(--main-color);
+  }
+
+  66.666% {
+    box-shadow: 9991px 0 0 0 var(--main-color), 10007px 0 0 0 var(--main-color), 9991px -16px 0 0 var(--main-color);
+  }
+
+  75% {
+    box-shadow: 9991px 0 0 0 var(--main-color), 10007px 0 0 0 var(--main-color), 10007px -16px 0 0 var(--main-color);
+  }
+
+  83.333% {
+    box-shadow: 9991px -16px 0 0 var(--main-color), 10007px 0 0 0 var(--main-color), 10007px -16px 0 0 var(--main-color);
+  }
+
+  91.667% {
+    box-shadow: 9991px -16px 0 0 var(--main-color), 9991px 0 0 0 var(--main-color), 10007px -16px 0 0 var(--main-color);
+  }
+
+  100% {
+    box-shadow: 9991px -16px 0 0 var(--main-color), 9991px 0 0 0 var(--main-color), 10007px 0 0 0 var(--main-color);
+  }
+}
+
+.loading {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -34,7 +34,6 @@ const props = defineProps(["editMode"])
 
 const {
     getCurrentEditSurvey,
-    getCurrentEditQuestion,
     getOpenSurveySetting,
     getOpenQuestionSetting
 } = storeToRefs(

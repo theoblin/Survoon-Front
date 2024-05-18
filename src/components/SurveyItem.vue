@@ -17,7 +17,12 @@
                 {{ moment(props.lastUpdateDate).format('MMMM Do YYYY, h:mm:ss a') }}
             </span>
             <span class="questions"> <font-awesome-icon class="icon" :icon="['fas', 'list']" /> {{
-                props.questions ? props.questions.length : "0" }} questions</span>
+                props.questions ? props.questions.length : "0" }} questions
+            </span>
+            <span class="length"> <font-awesome-icon class="icon" :icon="['fas', 'hourglass-start']" /> {{
+                props.questions ? props.questions.length * 10 : "0" }} secondes
+            </span>
+
 
         </div>
 

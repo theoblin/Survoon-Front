@@ -1,7 +1,7 @@
 <template>
     <div id="leftPanel">
         <div class="header">
-            <Button :bstyle="'secondary'" @click="addQuestion()">Ajouter une question</Button>
+            <Button :bstyle="'default'" @click="addQuestion()"><font-awesome-icon :icon="['fas', 'plus']" /></Button>
         </div>
         <div class="body">
             <div v-for="item in props.listQuestions">
@@ -30,11 +30,9 @@ import Button from "../components/Button.vue";
 import { reactive } from 'vue';
 import { CreateQuestion } from 'src/services/dto';
 import useAnswerStore from 'src/stores/answer';
-import useNotificationStore from 'src/stores/notifications';
 
 const surveyStore = useSurveyStore()
 const answerStore = useAnswerStore()
-const notificationStore = useNotificationStore()
 
 const props = defineProps(['listQuestions'])
 

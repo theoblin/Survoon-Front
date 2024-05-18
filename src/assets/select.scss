@@ -1,4 +1,4 @@
-select{
+select {
     background: none;
     color: inherit;
     border: none;
@@ -7,12 +7,16 @@ select{
     cursor: pointer;
     outline: inherit;
 
-   
+
+
 }
 
-#select{
+#select {
     width: 100%;
-    padding: 10px;
+    padding: 4px;
     border-radius: var(--main-border-radius);
-    box-shadow: var(--main-shadow);
+    border: var(--main-border);
+    background-color: var(--white);
+
+
 }

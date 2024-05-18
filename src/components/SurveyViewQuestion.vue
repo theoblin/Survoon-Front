@@ -1,5 +1,5 @@
 <template>
-    <div id="surveyQuestion">
+    <div id="surveyQuestion" :style="{ 'background-color': react['background-color'] }">
         <component :fontSize="react.fontSize" :title="react.title" :is="react.comp">
         </component>
     </div>
@@ -15,7 +15,8 @@ const answerStore = useAnswerStore()
 const react: any = reactive({
     comp: null,
     title: null,
-    fontSize: null
+    fontSize: null,
+    'background-color': 'red'
 })
 
 watch(
@@ -34,6 +35,8 @@ watch(() => answerStore.currentAnswer.ended, function (newVal, oldVal) {
         react.comp = defineAsyncComponent(() => import(`./questionTypes/End.vue`));
     }
 });
+
+
 
 
 </script>

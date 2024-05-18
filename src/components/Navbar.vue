@@ -7,13 +7,12 @@
         </div>
         <div id="part_2">
             <router-link :class="{ 'selected': navStore.currentPage == 'surveys', 'link': true }" to="/surveys">
-                <font-awesome-icon :icon="['fas', 'square-poll-vertical']" />Mes
-                surveys
+                <font-awesome-icon :icon="['fas', 'rectangle-list']" />&nbsp;Surveys
             </router-link>
-            <router-link :class="{ 'selected': navStore.currentPage == 'templates', 'link': true }" to="/templates">Mes
-                templates</router-link>
-            <router-link :class="{ 'selected': navStore.currentPage == 'results', 'link': true }" to="">Mes
-                résultats</router-link>
+            <router-link :class="{ 'selected': navStore.currentPage == 'templates', 'link': true }"
+                to="/templates"><font-awesome-icon :icon="['fas', 'brush']" />&nbsp;Templates</router-link>
+            <router-link :class="{ 'selected': navStore.currentPage == 'results', 'link': true }" to="">
+                <font-awesome-icon :icon="['fas', 'square-poll-vertical']" />&nbsp;Results</router-link>
         </div>
         <div id="part_3">
             <div class="profile">

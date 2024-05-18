@@ -1,19 +1,18 @@
-#reco{
+#reco {
     display: flex;
     flex-direction: column;
-    width: 80%;
     max-width: 650px;
     justify-content: center;
 
-    .digits{
+    .digits {
         display: flex;
         margin-bottom: 5px;
         justify-content: space-between;
         flex-wrap: wrap;
     }
 
-    .title{
-        .edit{
+    .title {
+        .edit {
             border: none;
             background: transparent;
             width: 100%;
@@ -25,21 +24,21 @@
 
 }
 
-.reco_item{
-    padding:10px;
+.reco_item {
+    padding: 10px;
     border: var(--main-border);
     border-radius: var(--main-border-radius);
-    cursor:pointer;
+    cursor: pointer;
     width: 25px;
     height: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--main-color-1);
-    color:var(--main-color-3);
+    color: var(--main-color-3);
 
 
-    &:hover{
+    &:hover {
         background-color: var(--secondary-color-1);
 
     }
@@ -47,11 +46,11 @@
 
 }
 
-.selected{
+.selected {
     background-color: var(--main-color-3);
     color: var(--main-text-color-1);
 
-    &:hover{
+    &:hover {
         background-color: var(--main-color-3);
         color: var(--main-text-color-1);
     }

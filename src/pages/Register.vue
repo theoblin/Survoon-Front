@@ -2,7 +2,9 @@
   <div id="signup-page">
     <div id="signup-elements">
       <h2>Sign up</h2>
-      <FormError id="form-error" v-if="userStore.errors.signup">{{ userStore.errors.signup }}</FormError>
+      <FormError id="form-error" v-if="userStore.errors.filter((error) => error.type == 'signup')">{{
+        userStore.errors.filter((error) => error.type == 'signup')
+      }}</FormError>
       <form id="form-group" ref="formRef" aria-label="Signup form" @submit.prevent="signup">
         <div id="input-group">
           <Input class="mb-10 default" :type="'email'" :placeholder="'Email*'" :required="true"

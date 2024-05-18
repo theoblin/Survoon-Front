@@ -1,48 +1,55 @@
-nav{
+nav {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 50px;
+    height: 60px;
     width: 100%;
     position: absolute;
-    background-color: white;
+    background-color: var(--white);
+    box-shadow: var(--main-shadow);
 
-    box-sizing:border-box;
-    -moz-box-sizing:border-box;
-    -webkit-box-sizing:border-box;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
 
-    border-bottom: 1px rgb(231, 231, 231) solid;
 
-    .link{
+    .link {
         text-decoration: none;
         color: inherit;
-        background-color: var(--main-color-2);
-        padding: 5px;
-        border-radius: var(--main-border-radius);
-    
+        background-color: var(--secondary-color);
+        border-radius: var(--third-border-radius);
+        padding: 8px;
+        padding-left: 15px;
+        padding-right: 15px;
     }
-    #part_1{
+
+    #part_1 {
         display: flex;
+        justify-content: start;
         width: 10%;
+
     }
-    #part_2{
+
+    #part_2 {
         display: flex;
         justify-content: space-around;
-        width: 50%;
+        width: 30%;
 
-        .selected{
-            background-color: var(--main);
-            background-color: var(--main-color-2);
-
+        .selected {
+            background-color: var(--fourth-color);
+            color: var(--third-text-color)
         }
     }
-    #part_3{
+
+    #part_3 {
+        width: 10%;
         display: flex;
         flex-direction: column;
+        align-items: end;
     }
-    
-    .round{
-        width:40px;
+
+    .round {
+        width: 40px;
         height: 40px;
         border-radius: 100%;
         display: flex;
@@ -50,32 +57,33 @@ nav{
         align-items: center;
         background-color: rgb(221, 149, 215);
         cursor: pointer;
-        
+
     }
 
-    .dropdown-content{
+    .dropdown-content {
         display: flex;
         justify-content: center;
         flex-direction: column;
         position: absolute;
-        border: var( --main-border);
-        border-radius: var( --main-border-radius);
+        border: var(--main-border);
+        border-radius: var(--main-border-radius);
         padding: 10px;
         background-color: white;
         margin-top: 2px;
         margin-left: -80px;
 
-        .link-dropdown{
+        .link-dropdown {
             text-decoration: none;
-            color:inherit;
+            color: inherit;
 
-            &:hover{
+            &:hover {
                 color: var(--secondary-text-color-1);
             }
 
         }
     }
-    .zone{
+
+    .zone {
         display: flex;
         justify-content: center;
         align-items: center;

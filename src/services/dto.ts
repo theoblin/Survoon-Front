@@ -1,3 +1,6 @@
+
+// - User
+
 export interface LoginUser {
     email: string;
     password: string;
@@ -36,6 +39,8 @@ export interface DecodedUserFromToken extends User {
     nbf: EpochTimeStamp
 }
 
+// - Survey
+
 export interface Survey{
     id:number,
     config:string,
@@ -55,11 +60,21 @@ export interface CreateSurvey{
     language:string
 }
 
+export interface UpdateSurvey{
+    name:string,
+    entry:string,
+}
+
+// - Language
+
 export interface Language{
     id:number,
     code:string,
     data:string,
 }
+
+// - Question
+
 
 export interface Question{
     id:number,
@@ -88,6 +103,8 @@ export interface QuestionType{
     name:string,
     config:string
 }
+
+// - Answer
 
 export interface Answer{
     id:number,
@@ -122,8 +139,18 @@ export interface AnswerBody{
     value:string,
 }
 
+// - Notification
+
 export interface Notification{
     id:string
     type:string
     message:string
+}
+
+//- Errors
+
+export interface Error{
+    name:string
+    message:string
+    type:string
 }

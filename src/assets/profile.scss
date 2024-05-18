@@ -1,5 +1,21 @@
-#profile{
+#profile-page {
     outline: 1px red solid;
-    height: 500px;
-    width: 30%;
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    #profile-form {
+        max-width: 500px;
+        min-width: 300px;
+
+        background-color: var(--main-color-3);
+        border-radius: var(--third-border-radius);
+        box-shadow: var(--main-shadow);
+
+        padding: 30px;
+
+    }
 }

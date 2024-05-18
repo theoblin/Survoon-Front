@@ -1,5 +1,5 @@
 <template>
-    <div v-if="getCurrentEditQuestion" id="surveyQuestion">
+    <div v-if="getCurrentEditQuestion" id="surveyQuestion" :style="{ 'background-color': react['background-color'] }">
         <component :fontSize="react.fontSize" :title="react.title" :is="react.comp" :editMode="surveyStore.editMode">
         </component>
     </div>
@@ -13,10 +13,19 @@ import { defineAsyncComponent, reactive, ref, watch } from 'vue'
 
 const surveyStore = useSurveyStore()
 
+const {
+    getCurrentEditQuestion,
+} = storeToRefs(
+    useSurveyStore()
+);
+
+
+
 const react: any = reactive({
     comp: null,
     title: null,
-    fontSize: null
+    fontSize: null,
+    'background-color': 'transparent'
 })
 
 // Wait for current question to change 
@@ -31,12 +40,16 @@ watch(
     { deep: true, immediate: true },
 );
 
-
-const {
-    getCurrentEditQuestion,
-} = storeToRefs(
-    useSurveyStore()
+watch(
+    () => surveyStore.currentEditSurvey, function (survey, oldVal) {
+        if (survey) {
+            console.log(survey)
+            react['background-color'] = survey.config[0]
+        }
+    },
+    { deep: true, immediate: true },
 );
+
 
 
 
