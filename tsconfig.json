@@ -29,7 +29,8 @@
   "ts-node": {
     "compilerOptions": {
       "module": "ESNext",
-      "moduleResolution": "node"
+      "moduleResolution": "node",
+      "strictNullChecks": false,
     }
   }
 }

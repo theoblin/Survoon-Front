@@ -1,4 +1,8 @@
 <template>
+    <div v-if="!getCurrentEditQuestion" class="no-question-selected">
+        <span v-if="getCurrentEditSurvey.question.length > 0">Select a question</span>
+        <span v-if="getCurrentEditSurvey.question.length == 0">Ajoutez une nouvelle question</span>
+    </div>
     <div v-if="getCurrentEditQuestion" id="surveyQuestion" :style="{ 'background-color': react['background-color'] }">
         <component :fontSize="react.fontSize" :title="react.title" :is="react.comp" :editMode="surveyStore.editMode">
         </component>
@@ -15,9 +19,11 @@ const surveyStore = useSurveyStore()
 
 const {
     getCurrentEditQuestion,
+    getCurrentEditSurvey
 } = storeToRefs(
     useSurveyStore()
 );
+
 
 
 

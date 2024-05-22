@@ -3,7 +3,8 @@ import {defineStore } from 'pinia'
 
 const useNavStore = defineStore('nav', {
     state: () => ({
-        open:false as boolean,
+        openUser:false as boolean,
+        openLang:false as boolean,
         currentPage:"",
     }),
 
@@ -12,11 +13,17 @@ const useNavStore = defineStore('nav', {
     },
     actions: {
 
-        toggleDropdown(){
-            this.open = !this.open;
+        toggleUserDropdown(){
+            this.openUser = !this.openUser;
         },
-        closeDropdown(){
-        this.open = false;
+        closeUserDropdown(){
+        this.openUser = false;
+        },
+        toggleLangDropdown(){
+            this.openLang = !this.openLang;
+        },
+        closeLangDropdown(){
+        this.openLang = false;
         },
         setCurrentPage(page:string){
             this.currentPage = page;

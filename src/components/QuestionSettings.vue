@@ -12,7 +12,7 @@
             </div>
             <div class="item">
                 <span>Code </span>
-                <Input class="name-input item" @input="liveUpdate($event, 'name')"></Input>
+                <Input class="name-input item" @input="liveUpdate($event, 'code')" v-model="selected.code"></Input>
             </div>
             <div class="category">Title</div>
             <div class="items-group">
@@ -68,6 +68,7 @@ watch(
             selected.id = question.id
             selected.title = question.title
             selected.name = question.name
+            selected.code = question.code
             selected.style[0].fontSize = question.style[0].fontSize
             selected.questionType = question.questionType.id
         }

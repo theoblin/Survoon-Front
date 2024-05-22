@@ -1,6 +1,6 @@
 import axios from "axios";
 import { CONFIG } from "../../config";
-import { Answer, CreateAnswer, CreateQuestion, CreateSurvey, LoginUser, Question, RegisterUser, Survey, UpdateAnswer, UpdateQuestion, UpdateSurvey, UpdateUser, User } from "./dto";
+import { Answer, CreateAnswer, CreateQuestion, CreateSurvey, LoginUser, RegisterUser, UpdateAnswer, UpdateQuestion, UpdateSurvey, UpdateUser, User } from "./dto";
 import Storage from "../utils/storage"
 
 const baseUrl =  `${CONFIG.API_HOST}`

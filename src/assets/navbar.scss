@@ -50,27 +50,86 @@ nav {
 
     .round {
         width: 40px;
+        min-width: 40px;
         height: 40px;
+        min-height: 40px;
         border-radius: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
         background-color: rgb(221, 149, 215);
         cursor: pointer;
+        margin: 10px;
+
+        &:hover {
+            outline: 2px var(--fourth-color) solid;
+        }
+
 
     }
 
-    .dropdown-content {
+    .flag {
+        width: 20px;
+        border-radius: var(--secondary-border-radius);
+        margin-right: 3px;
+    }
+
+    .icon-drop {
+        padding-bottom: 3px;
+        font-size: 13px;
+    }
+
+    .user-dropdown {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         flex-direction: column;
         position: absolute;
         border: var(--main-border);
         border-radius: var(--main-border-radius);
         padding: 10px;
         background-color: white;
-        margin-top: 2px;
-        margin-left: -80px;
+        margin-top: -3px;
+        margin-left: -170px;
+        width: 200px;
+
+        .header {
+            color: var(--fourth-color);
+            padding: 5px;
+
+            border-bottom: 2px var(--secondary-color) solid;
+
+            .email {
+                font-size: 15px;
+            }
+        }
+
+        .content {
+            margin-top: 10px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        .footer {
+            margin-top: 10px;
+        }
+
+        .drop-item {
+            cursor: pointer;
+            padding: 5px;
+
+            .icon {
+                color: var(--fourth-color);
+                padding-right: 10px;
+            }
+
+            &:hover {
+                background-color: var(--secondary-color);
+                border-radius: var(--main-border-radius);
+            }
+        }
+
 
         .link-dropdown {
             text-decoration: none;
@@ -83,9 +142,27 @@ nav {
         }
     }
 
+    .lang-dropdown {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        position: absolute;
+        border: var(--main-border);
+        border-radius: var(--main-border-radius);
+        padding: 10px;
+        background-color: white;
+        margin-top: -15px;
+        margin-left: 55px;
+
+
+    }
+
     .zone {
         display: flex;
         justify-content: center;
         align-items: center;
+
+        cursor: pointer;
+
     }
 }

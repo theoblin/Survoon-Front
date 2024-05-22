@@ -16,7 +16,7 @@ const react: any = reactive({
     comp: null,
     title: null,
     fontSize: null,
-    'background-color': 'red'
+    'background-color': 'transparent'
 })
 
 watch(

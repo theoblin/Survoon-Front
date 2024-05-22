@@ -1,5 +1,5 @@
 <template>
-    <div @click="editSurvey()" id="item" class="survey">
+    <div id="item" class="survey">
         <div class="header">
             <div class="name">
                 <strong>{{ props.name }}</strong>
@@ -31,7 +31,7 @@
             </div>
             <div class="action" @click="testSurvey()"><font-awesome-icon :icon="['far', 'eye']" /></div>
             <div class="action">
-                <font-awesome-icon :icon="['fas', 'chart-line']" />
+                <font-awesome-icon @click="checkResults()" :icon="['fas', 'chart-line']" />
             </div>
             <div class="action">
                 <font-awesome-icon v-if="props.entry == 'private'" :icon="['fas', 'lock']" />
@@ -58,6 +58,10 @@ function editSurvey() {
 
 function testSurvey() {
     answerStore.createPreAnswer(props.id, props.entry)
+}
+
+function checkResults() {
+    router.push({ path: `/user/survey/${props.id}/results/` })
 }
 
 function getImgUrl(lg: string) {

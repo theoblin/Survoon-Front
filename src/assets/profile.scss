@@ -1,5 +1,4 @@
 #profile-page {
-    outline: 1px red solid;
     height: 100%;
     width: 100%;
 
@@ -11,11 +10,25 @@
         max-width: 500px;
         min-width: 300px;
 
-        background-color: var(--main-color-3);
+        background-color: var(--white);
         border-radius: var(--third-border-radius);
         box-shadow: var(--main-shadow);
 
         padding: 30px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+
+            span {
+                color: var(--fourth-color);
+                padding-bottom: 5px;
+            }
+        }
 
     }
 }

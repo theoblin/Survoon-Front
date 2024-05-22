@@ -12,14 +12,13 @@ button {
     width: 100%;
     padding: 10px;
     border-radius: var(--main-border-radius);
-    color: var(--third-text-color);
 }
 
 .default {
     background-color: var(--main-color);
     transition: background-color 0.2s ease-out;
     box-shadow: var(--main-shadow);
-
+    color: var(--third-text-color);
 
     &:hover {
         background-color: var(--secondary-color);
@@ -36,6 +35,7 @@ button {
     justify-content: center;
     align-items: center;
     border: 1px rgba(0, 0, 0, 0.041) solid;
+    color: var(--third-text-color);
 
     &:hover {
         background-color: var(--secondary-color-2);
@@ -59,6 +59,7 @@ button {
 .danger {
 
     background-color: var(--danger-notif);
+    color: var(--third-text-color);
 
     .icon {
         color: white;
@@ -69,4 +70,14 @@ button {
         }
     }
 
+}
+
+.survey {
+    background-color: transparent;
+    text-align: right;
+    color: var(--main-color);
+
+    &:hover {
+        color: var(--secondary-text-color)
+    }
 }

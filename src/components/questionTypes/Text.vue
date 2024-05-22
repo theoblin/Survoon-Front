@@ -8,7 +8,7 @@
         <textarea class="opentext" v-model="model">
         </textarea>
 
-        <Button :bstyle="'secondary'" @click="next()">Next</Button>
+        <Button :bstyle="'survey'" @click="next()">Next <font-awesome-icon :icon="['fas', 'arrow-right']" /></Button>
 
     </div>
 </template>

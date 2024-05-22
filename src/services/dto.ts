@@ -79,6 +79,7 @@ export interface Language{
 export interface Question{
     id:number,
     name:string,
+    code:string,
     title:string,
     config:Object,
     style:Object,
@@ -102,6 +103,10 @@ export interface QuestionType{
     id:number,
     name:string,
     config:string
+}
+
+export interface Reco extends QuestionType{
+    title:string,
 }
 
 // - Answer

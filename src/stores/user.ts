@@ -28,7 +28,7 @@ const useUserStore = defineStore('user', {
         return false
       }
       try{
-        const decoded = jwtDecode(user.token)
+        const decoded= jwtDecode(user.token)
         if (decoded.email&&decoded.id&&decoded.exp&&decoded.iat) {
           return (jwtDecode(user.token) as DecodedUserFromToken).exp > Math.floor(Date.now() / 1000)
         }else{

@@ -33,7 +33,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import App from './App.vue'
 import router from './router'
 import {faEye, faPenToSquare} from "@fortawesome/free-regular-svg-icons";
-import { faChartLine, faClock,faRectangleList, faClockRotateLeft, faList, faLock, faLockOpen, faPlus, faSquareXmark,faSquarePollVertical,faFloppyDisk, faTrash, faLink, faGears, faArrowLeft, faHourglassStart, faGrip, faGripLines, faBrush, faArrowDownWideShort } from '@fortawesome/free-solid-svg-icons'
+import { faChartLine,faUser,faCircleQuestion, faClock,faRectangleList, faClockRotateLeft, faList, faLock, faLockOpen, faPlus, faSquareXmark,faSquarePollVertical,faFloppyDisk, faTrash, faLink, faGears, faArrowLeft, faHourglassStart, faGrip, faGripLines, faBrush, faArrowDownWideShort, faChevronDown, faRightFromBracket, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 
@@ -60,6 +60,11 @@ library.add(faGripLines);
 library.add(faRectangleList);
 library.add(faBrush);
 library.add(faArrowDownWideShort);
+library.add(faChevronDown);
+library.add(faUser);
+library.add(faRightFromBracket);
+library.add(faCircleQuestion);
+library.add(faArrowRight);
 
 const app = createApp(App)
 .component("font-awesome-icon", FontAwesomeIcon)
