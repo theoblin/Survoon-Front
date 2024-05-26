@@ -87,6 +87,9 @@ export class Api{
       getOneAnswerByCode:(answerCode:string,surveyId:number)=> {
         return axios.get(baseUrl+`/survey/${surveyId}/answer/${answerCode}`)
       },
+      getSurveyAnswersById:(surveyId:number)=> {
+        return axios.get(baseUrl+`/survey/${surveyId}/answers`)
+      },
       createOneAnswer:(data:CreateAnswer,surveyId:number)=> {
         return axios.post(baseUrl+`/survey/${surveyId}/answer`,{answer:data})
       },

@@ -1,0 +1,12 @@
+#nps {
+    display: flex;
+    flex-direction: column;
+
+    .value {
+        position: absolute;
+
+        font-size: 30px;
+        font-weight: bold;
+        width: 100px;
+    }
+}

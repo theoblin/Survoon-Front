@@ -24,6 +24,10 @@ import './assets/slider.scss'
 import './assets/surveyView.scss'
 import './assets/filters.scss'
 import './assets/end.scss'
+import './assets/resultBloc.scss'
+import './assets/results.scss'
+import './assets/charts.scss'
+import './assets/comments.scss'
 
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import { library } from "@fortawesome/fontawesome-svg-core";

@@ -103,6 +103,7 @@ const useAnswerStore = defineStore('answer', {
             if(this.currentViewSurvey && answerCode){
                 api.answer.getOneAnswerByCode(answerCode,this.currentViewSurvey.id).then((response:any)=> {
 
+
                     response.data.answer.body.forEach((question:AnswerBody) => {
                         this.currentBody.push(question)
                     }); 
@@ -203,7 +204,7 @@ const useAnswerStore = defineStore('answer', {
                     {
                         id:this.currentViewQuestion.id,
                         name:this.currentViewQuestion.name,
-                        type:this.currentViewQuestion.type,
+                        type:this.currentViewQuestion.questionType.name,
                         value:data
                     }
                 )

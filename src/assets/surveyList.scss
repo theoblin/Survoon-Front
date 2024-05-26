@@ -42,9 +42,6 @@
                     padding-left: 10px;
                 }
             }
-
-
-
         }
 
         .items {
@@ -55,5 +52,23 @@
         }
 
 
+    }
+
+
+    /* width */
+    ::-webkit-scrollbar {
+        width: 7px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background-color: var(--secondary-color);
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--third-color);
+        border-radius: 10px;
     }
 }

@@ -41,7 +41,7 @@ const router = createRouter({
     {
       name: 'home',
       path: '/',
-      component: () => import('../pages/Home.vue'),
+      component: () => import('../pages/Surveys.vue'),
       meta: { requiresAuth: true },
     },
     {
@@ -83,7 +83,7 @@ const router = createRouter({
     },
     {
       name: 'results',
-      path: '/survey/:id/results',
+      path: '/user/survey/:id/results',
       component: () => import('../pages/Results.vue'),
       meta: { requiresAuth: true },
     },

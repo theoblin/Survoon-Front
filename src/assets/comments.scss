@@ -1,0 +1,60 @@
+.comments {
+
+    padding: 10px;
+
+    .comment {
+
+        display: flex;
+        flex-direction: row;
+
+        .left-comment {
+
+            display: flex;
+            flex-direction: row;
+
+            .round {
+                width: 30px;
+                min-width: 30px;
+                height: 30px;
+                min-height: 30px;
+                border-radius: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: rgb(204, 204, 204);
+                margin: 10px;
+
+            }
+
+        }
+
+
+        .right-comment {
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        background-color: var(--secondary-color);
+        border-radius: var(--main-border-radius);
+        margin-bottom: 10px;
+
+        width: 100%;
+
+
+        .body {
+            padding: 5px;
+            font-style: italic;
+        }
+
+        .header {
+            color: var(--third-color);
+            padding: 5px;
+        }
+
+
+    }
+
+
+
+}

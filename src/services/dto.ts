@@ -144,6 +144,14 @@ export interface AnswerBody{
     value:string,
 }
 
+export interface AnswerText{
+    id:number,
+    name:string,
+    type:string,
+    value:string,
+    createdDate:string,
+}
+
 // - Notification
 
 export interface Notification{

@@ -10,6 +10,23 @@
                 <Input v-model="selected.link"></Input>
             </div>
             <div class="item">
+                <span>QR code</span>
+                <QRCodeVue3 :value="selected.link" :width="100" :height="100" downloadButton="my-button" :dotsOptions="{
+                    type: 'dots',
+                    color: '#e94f37',
+                    gradient: {
+                        type: 'linear',
+                        rotation: 0,
+                        colorStops: [
+                            { offset: 0, color: '#e94f37' },
+                            { offset: 1, color: '#e94f37' },
+                        ],
+                    },
+                }" :download="true" :downloadOptions="{ name: 'vqr', extension: 'png' }" />
+            </div>
+
+
+            <div class="item">
                 <span>Visiblity</span>
                 <Select :attrDisplay="'value'" :attrValue="'value'"
                     :options="[{ 'value': 'private' }, { 'value': 'public' }]" v-model="selected.entry"></Select>
@@ -46,6 +63,7 @@ import Input from "../components/Input.vue";
 import Button from "../components/Button.vue";
 import useAnswerStore from 'src/stores/answer';
 import Select from "../components/Select.vue";
+import QRCodeVue3 from "qrcode-vue3";
 
 const surveyStore = useSurveyStore()
 const answerStore = useAnswerStore()
